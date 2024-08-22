@@ -1,5 +1,5 @@
 <template>
-  <span :class="['poke-text', `poke-text--${props.type}`]">
+  <span :class="['poke-text', `poke-text--${props.type}`, textAlign]">
     {{ props.text }}
   </span>
 </template>
@@ -8,4 +8,5 @@
 import { TextProps } from '../..//interfaces/Text.ts';
 
 const props = defineProps<TextProps>();
+const textAlign = props.alignment ? `poke-button--${props.alignment}` : '';
 </script>

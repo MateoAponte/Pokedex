@@ -1,3 +1,9 @@
 .poke-app {
   background-color: map-get($colors, 'light-gray');
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 2.1rem 1.8rem;
 }

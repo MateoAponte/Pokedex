@@ -1,6 +1,6 @@
 .poke-text {
-  font-size: 1rem;
-  line-height: 1.3rem;
+  font-size: 1.1rem;
+  line-height: 1.68rem;
   font-weight: 500;
   color: map-get($colors, 'dark-gray');
 
@@ -9,15 +9,27 @@
     line-height: 2.6rem;
     font-weight: 700;
     color: map-get($colors, 'black');
+    display: block;
   }
   &--subheading {
     font-size: 1.1rem;
-    line-height: 1.6rem;
+    line-height: 1.68rem;
     font-weight: 500;
+    display: block;
   }
   &--label {
     font-size: 1rem;
     line-height: 1.6rem;
     font-weight: 600;
+  }
+
+  &--center {
+    text-align: center;
+  }
+  &--right {
+    text-align: right;
+  }
+  &--left {
+    text-align: left;
   }
 }

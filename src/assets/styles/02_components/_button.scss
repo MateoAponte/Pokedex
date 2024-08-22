@@ -1,6 +1,13 @@
 .poke-button {
-  padding: 0.6rem 1.2rem;
-  border-radius: 50%;
+  padding: 0.7rem 1.2rem;
+  border-radius: 60px;
+  display: block;
+  border: none;
+  color: map-get($colors, 'white');
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.2rem;
+  letter-spacing: 0.6px;
 
   &--left {
     text-align: left;

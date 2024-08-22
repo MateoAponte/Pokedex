@@ -1,0 +1,44 @@
+.get-started {
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__image {
+    height: 20.3rem;
+    width: 20.3rem;
+    position: relative;
+    margin-bottom: 3rem;
+
+    &-character,
+    &-circle {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    &-character {
+      z-index: 2;
+    }
+    img {
+      height: 100%;
+      width: 100%;
+    }
+
+    &-circle {
+      height: 66% !important;
+      width: 78% !important;
+      bottom: 1.69rem;
+      right: 1.75rem;
+    }
+  }
+
+  &__title {
+    margin-bottom: 1.8rem;
+  }
+  &__helper {
+    margin-bottom: 3.1rem;
+  }
+}

@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterView } from 'vue-router';
+</script>
 
 <template>
-  <div class="poke-app">Poke</div>
+  <div class="poke-app">
+    <RouterView />
+  </div>
 </template>

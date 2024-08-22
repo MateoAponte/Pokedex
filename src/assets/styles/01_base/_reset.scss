@@ -8,3 +8,34 @@
 body {
   background-color: map-get($colors, 'light-gray');
 }
+
+@media screen and (max-width: 1920px) {
+  html {
+    font-size: 120%;
+  }
+}
+@media screen and (max-width: 1440px) {
+  html {
+    font-size: 110%;
+  }
+}
+@media screen and (max-width: 1280px) {
+  html {
+    font-size: 100%;
+  }
+}
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 95%;
+  }
+}
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 90%;
+  }
+}
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 75%;
+  }
+}
