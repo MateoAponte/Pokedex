@@ -13,9 +13,9 @@
   }
 
   &--red {
-    background-color: ($colors, $red);
+    background-color: map-get($colors, 'red');
   }
   &--gray {
-    background-color: ($colors, $gray);
+    background-color: map-get($colors, 'gray');
   }
 }
