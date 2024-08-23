@@ -23,6 +23,17 @@ export const actions: Actions = {
   setShowPreview: (show) => {
     state.showPreview.value = show;
   },
+  filterPokemons: (filter) => {
+    state.pokemons.value = state.cachePokemons.value.filter((pokemon) => {
+      return pokemon.name.toLowerCase().includes(filter.toLowerCase());
+    });
+  },
+  setFilter: (filter) => {
+    state.filter.value = filter;
+  },
+  resetPokemons: () => {
+    state.pokemons.value = [...state.cachePokemons.value];
+  },
   async getPokemonsByPagination() {
     const { current, next } = state.pagination.value;
     return await PokeApi.getAllPokemons(current, next)

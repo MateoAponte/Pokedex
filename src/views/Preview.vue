@@ -3,6 +3,7 @@
     <Pokedex
       :show="showPreview"
       :isLoading="isLoading"
+      :isFiltered="!!filter"
       @loadNewContent="getNewPokemons"
     >
       <template #filter>
@@ -40,7 +41,8 @@ const isLoading = ref(false);
 
 const pokemonStore = usePokemonStore();
 
-const { pokemons, currentPokemon, showPreview } = storeToRefs(pokemonStore);
+const { pokemons, currentPokemon, showPreview, filter } =
+  storeToRefs(pokemonStore);
 
 const getNewPokemons = (executePagination: boolean) => {
   if (isLoading.value) return;

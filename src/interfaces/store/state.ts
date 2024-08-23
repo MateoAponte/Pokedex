@@ -10,4 +10,5 @@ export interface State {
   currentPokemon: Ref<Pokemon>;
   pagination: Ref<Pagination>;
   showPreview: Ref<boolean>;
+  filter: Ref<string>;
 }

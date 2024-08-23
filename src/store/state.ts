@@ -5,6 +5,7 @@ export const state: State = {
   cachePokemons: ref([]),
   pokemons: ref([]),
   favorities: ref([]),
+  filter: ref(''),
   currentPokemon: ref({
     name: '',
     weight: 0,

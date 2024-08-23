@@ -11,6 +11,9 @@ export interface Actions {
   setPagination: () => void;
   setShowPreview: (show: boolean) => void;
   fetchPokemonTypes: (pokemon: Pokemon) => Promise<AxiosResponse[]>;
+  filterPokemons: (filter: string) => void;
+  setFilter: (filter: string) => void;
+  resetPokemons: () => void;
   getPokemonsByPagination: () => Promise<AxiosResponse<ListPokemonApi>>;
   getPokemonByName: (pokemonName: string) => Promise<AxiosResponse<PokemonApi>>;
 }

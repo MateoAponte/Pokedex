@@ -3,7 +3,7 @@
     <slot name="filter" />
     <slot name="noContent" />
     <slot name="information" />
-    <div ref="loadMoreTrigger">
+    <div ref="loadMoreTrigger" v-if="!props.isFiltered">
       <div class="preview__loader">
         <slot name="loader" />
       </div>

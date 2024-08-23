@@ -2,7 +2,11 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { InputProps } from '../../interfaces/Input.ts';
 
+const $emit = defineEmits(['update:value']);
 const props = defineProps<InputProps>();
+
+// Definimos el modelo usando defineModel
+const modelValue = defineModel<string>();
 
 const onFocus = ref<boolean>(false);
 const input = ref(null);
@@ -15,6 +19,11 @@ const handleClick = (event: Event) => {
     onFocus.value = true;
   } else {
     onFocus.value = false;
+  }
+};
+const emitValue = (event: Event) => {
+  if (event.target) {
+    modelValue.value = event.target.value;
   }
 };
 
@@ -37,6 +46,8 @@ onUnmounted(() => {
       :disabled="props.isDisabled"
       :required="props.isRequired"
       class="poke-input__field"
+      :value="modelValue"
+      @input="emitValue"
     />
   </div>
 </template>
