@@ -41,8 +41,8 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { Pokemon } from '../../interfaces/pokemon/Pokemon';
-import Background from '../../assets/images/background.png';
+import { Pokemon } from '../../../interfaces/pokemon/Pokemon';
+import Background from '../../../assets/images/background.png';
 import { AnFilledCloseCircle, BxSolidStar } from '@kalimahapps/vue-icons';
 
 const $emit = defineEmits(['close']);

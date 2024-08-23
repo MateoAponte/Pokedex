@@ -4,14 +4,15 @@
       v-for="(pokemon, index) in props.list"
       :key="index"
       :pokemon="pokemon"
+      :index="index"
       @click="handleClick(pokemon)"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { PokeList } from '../../interfaces/components/Pokelist';
-import { PokemonList } from '../../interfaces/pokemon/PokemonList';
+import { PokeList } from '../../../interfaces/components/Pokelist';
+import { PokemonList } from '../../../interfaces/pokemon/PokemonList';
 import PokeItem from './PokeItem.vue';
 
 const $emit = defineEmits(['setPokemon']);

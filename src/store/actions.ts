@@ -16,7 +16,7 @@ export const actions: Actions = {
   setPagination: () => {
     state.pagination.value = {
       current: state.pagination.value.current + state.pagination.value.step,
-      next: state.pagination.value.step * 2,
+      next: state.pagination.value.step + 20,
       step: state.pagination.value.step,
     };
   },
@@ -27,8 +27,8 @@ export const actions: Actions = {
     const { current, next } = state.pagination.value;
     return await PokeApi.getAllPokemons(current, next)
       .then((response) => {
-        state.pokemons.value = response.data.results;
-        state.pagination.value = response.data;
+        state.cachePokemons.value.push(...response.data.results);
+        state.pokemons.value = [...state.cachePokemons.value];
       })
       .catch((error) => {
         return error;
@@ -62,7 +62,6 @@ export const actions: Actions = {
         const typesResources = getPokemonTypes(parsedTypes);
 
         state.currentPokemon.value = { ...pokemon, types: typesResources };
-        console.log(state.currentPokemon.value);
       })
       .catch((error) => {
         this.setShowPreview(false);

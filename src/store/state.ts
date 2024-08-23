@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import { State } from '../interfaces/store/state';
 
 export const state: State = {
+  cachePokemons: ref([]),
   pokemons: ref([]),
   favorities: ref([]),
   currentPokemon: ref({
@@ -16,6 +17,5 @@ export const state: State = {
     current: 0,
     next: 20,
   }),
-  cachePokemons: ref([]),
   showPreview: ref(false),
 };
