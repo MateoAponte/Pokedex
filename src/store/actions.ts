@@ -39,6 +39,11 @@ export const actions: Actions = {
     return await PokeApi.getAllPokemons(current, next)
       .then((response) => {
         state.cachePokemons.value.push(...response.data.results);
+        state.cachePokemons.value = state.cachePokemons.value.map(
+          (pokemon, index) => {
+            return pokemon.id ? { ...pokemon } : { ...pokemon, id: index };
+          }
+        );
         state.pokemons.value = [...state.cachePokemons.value];
       })
       .catch((error) => {
@@ -61,7 +66,7 @@ export const actions: Actions = {
     return await PokeApi.getPokemonByName(pokemonName)
       .then(async (response) => {
         this.setShowPreview(true);
-        const { name, weight, height, sprites, types } = response.data;
+        const { name, weight, height, sprites, types, id } = response.data;
         const pokemon = {
           name,
           weight,

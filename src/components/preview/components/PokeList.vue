@@ -4,7 +4,7 @@
       v-for="(pokemon, index) in props.list"
       :key="index"
       :pokemon="pokemon"
-      :index="index"
+      :id="pokemon.id"
       @click="handleClick(pokemon)"
     />
   </div>

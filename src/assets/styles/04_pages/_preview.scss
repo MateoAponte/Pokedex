@@ -11,7 +11,6 @@
     max-height: 90vh;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0 0.7rem;
     display: flex;
     flex-direction: column;
   }
@@ -30,8 +29,16 @@
     }
   }
 
-  .poke-input {
+  .preview__filter {
     width: 100%;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background-color: map-get($colors, 'light-gray');
+    border-radius: 0;
+    padding: 0.8rem;
+    box-shadow: 0px 3px 4px 0px #0000000a;
   }
 
   .poke-item {
@@ -74,6 +81,7 @@
   .poke-list {
     width: 100%;
     margin-top: 2.5rem;
+    padding: 0 0.7rem;
   }
 
   .poke-rate {

@@ -1,5 +1,7 @@
 <template>
-  <PokeInput placeholder="Buscar" :icon="BxSearch" v-model="filter" />
+  <div class="preview__filter">
+    <PokeInput placeholder="Buscar" :icon="BxSearch" v-model="filter" />
+  </div>
 </template>
 
 <script lang="ts" setup>

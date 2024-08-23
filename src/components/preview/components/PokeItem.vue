@@ -18,7 +18,7 @@ import { computed } from 'vue';
 const props = defineProps<PokeItem>();
 
 const getDecenes = computed(() => {
-  const realNumber = props.index + 1;
+  const realNumber = props.id + 1;
   return realNumber.toString().padStart(4, '0');
 });
 </script>
