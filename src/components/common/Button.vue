@@ -3,7 +3,12 @@
     :disabled="props.isDisabled"
     :class="['poke-button', colorButton, isLoading, isDisabled, colorSize]"
   >
-    {{ text }}
+    <span class="poke-button__icon">
+      <props.icon v-if="props.icon" />
+    </span>
+    <span class="poke-button__text">
+      {{ text }}
+    </span>
   </button>
 </template>
 

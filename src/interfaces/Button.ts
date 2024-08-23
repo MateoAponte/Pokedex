@@ -1,3 +1,4 @@
+import { Component } from 'vue';
 import { ButtonsColors, ButtonSize } from '../types/Button';
 
 export interface ButtonProps {
@@ -6,4 +7,5 @@ export interface ButtonProps {
   isLoading?: boolean;
   color: ButtonsColors;
   size: ButtonSize;
+  icon?: Component;
 }

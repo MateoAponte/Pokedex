@@ -9,6 +9,7 @@
   line-height: 1.2rem;
   letter-spacing: 0.6px;
   cursor: pointer;
+  transition: all 0.2s ease;
 
   &--left {
     text-align: left;
@@ -32,8 +33,25 @@
 
   &--red {
     background-color: map-get($colors, 'red');
+    &:hover {
+      background-color: darken(map-get($colors, 'red'), 15%);
+    }
   }
   &--gray {
     background-color: map-get($colors, 'gray');
+    &:hover {
+      background-color: darken(map-get($colors, 'gray'), 15%);
+    }
+  }
+
+  &__icon {
+    position: relative;
+    top: 0.15rem;
+    margin-right: 0.62rem;
+    font-size: 1.37rem;
+  }
+  &__text {
+    position: relative;
+    top: -0.15rem;
   }
 }
