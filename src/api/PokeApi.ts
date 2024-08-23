@@ -16,6 +16,10 @@ class PokeApi {
   public getPokemonByName(name: string) {
     return axios.get(`${this.pokemonEndpoint}/${name}`);
   }
+
+  public getTypes(url: string) {
+    return axios.get(url);
+  }
 }
 
 export default new PokeApi();

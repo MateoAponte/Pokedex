@@ -16,7 +16,6 @@ const handleClick = (event: Event) => {
   } else {
     onFocus.value = false;
   }
-  console.log(onFocus.value);
 };
 
 onMounted(() => {

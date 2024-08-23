@@ -1,0 +1,58 @@
+<template>
+  <div class="preview__backdrop">
+    <div class="preview__element">
+      <div class="preview__image">
+        <img :src="props.sprite" alt="" />
+        <span class="preview__close">
+          <AnFilledCloseCircle @click="handleClose" />
+        </span>
+      </div>
+      <div class="preview__info">
+        <div v-for="field of getSummaryFields" class="preview__info-item">
+          <span class="preview__info-item__label"> {{ field.key }}: </span>
+          <span class="preview__info-item__content">
+            {{ field.value }}
+          </span>
+        </div>
+        <div class="preview__info-item">
+          <span class="preview__info-item__label"> Types: </span>
+          <span
+            class="preview__info-item__content preview__info-item__content--image"
+            v-for="types in getTypes"
+          >
+            <img :src="types" alt="asdasd" />
+          </span>
+        </div>
+      </div>
+      <div class="preview__actions">
+        <PokeButton text="Share to my friends" color="red" size="medium" />
+        <div class="poke-rate">
+          <BxSolidStar />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { computed } from 'vue';
+import { Pokemon } from '../../interfaces/pokemon/Pokemon';
+import { AnFilledCloseCircle, BxSolidStar } from '@kalimahapps/vue-icons';
+
+const $emit = defineEmits(['close']);
+
+const getSummaryFields = computed(() => {
+  const { sprite, types, ...content } = props;
+  return Object.keys(content).map((key) => ({ value: content[key], key }));
+});
+const getTypes = computed(() => {
+  const { types } = props;
+  return types;
+});
+
+const handleClose = () => {
+  $emit('close');
+};
+
+const props = defineProps<Pokemon>();
+</script>

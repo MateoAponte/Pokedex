@@ -43,6 +43,7 @@
     justify-content: space-between;
     transition: all 0.3s ease;
     margin-bottom: 1rem;
+    cursor: pointer;
 
     &:hover {
       transform: scale(1.02);
@@ -56,42 +57,144 @@
       display: inline-block;
       text-transform: capitalize;
     }
-    &__rate {
-      width: 2.75rem;
-      height: 2.75rem;
-      border-radius: 50%;
-      background-color: map-get($colors, 'light-gray');
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: map-get($colors, 'gray');
-      transition: all 0.3s ease;
-      cursor: pointer;
-
-      &:hover {
-        background-color: darken(map-get($colors, 'light-gray'), 8%);
-        svg {
-          color: map-get($colors, 'dark-yellow');
-        }
-      }
-
-      svg {
-        font-size: 1.62rem;
-        transition: inherit;
-      }
-
-      &--unchecked {
-        color: map-get($colors, 'gray');
-      }
-      &--checked {
-        color: map-get($colors, 'dark-yellow');
-      }
-    }
   }
 
   .poke-list {
     width: 100%;
     margin-top: 2.5rem;
+  }
+
+  .poke-rate {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background-color: map-get($colors, 'light-gray');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: map-get($colors, 'gray');
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken(map-get($colors, 'light-gray'), 8%);
+      svg {
+        color: map-get($colors, 'dark-yellow');
+      }
+    }
+
+    svg {
+      font-size: 1.62rem;
+      transition: inherit;
+    }
+
+    &--unchecked {
+      color: map-get($colors, 'gray');
+    }
+    &--checked {
+      color: map-get($colors, 'dark-yellow');
+    }
+  }
+
+  .preview__backdrop {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1.87rem;
+  }
+  .preview__element {
+    width: 100%;
+    border-radius: 5px;
+    height: 70vh;
+    background-color: map-get($colors, 'white');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 15;
+    .preview__image {
+      width: 100%;
+      height: 40%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .preview__close {
+        position: absolute;
+        top: 0.93rem;
+        right: 0.93rem;
+        color: rgba(map-get($colors, 'white'), 0.8);
+        font-size: 1.62rem;
+        cursor: pointer;
+      }
+      img {
+        width: 30%;
+        height: 60%;
+      }
+    }
+    .preview__info {
+      padding: 1.87rem 1.25rem;
+      height: 50%;
+      overflow: auto;
+
+      &-item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: map-get($colors, 'black');
+        padding: 0 0 0.62rem 0.2rem;
+        margin-bottom: 0.62rem;
+        border-bottom: 1px solid map-get($colors, 'border-gray');
+
+        &__label {
+          font-weight: 700;
+          font-size: 1.1rem;
+          line-height: 1.6rem;
+          margin-right: 0.8rem;
+          text-transform: capitalize;
+        }
+        &__content {
+          font-weight: 500;
+          font-size: 1.1rem;
+          line-height: 1.6rem;
+          text-transform: capitalize;
+
+          &--image {
+            display: flex;
+            align-items: center;
+            width: 6rem;
+            height: 1.4rem;
+            margin-right: 0.7rem;
+            transition: all 0.3s ease;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+    .preview__actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      .poke-button {
+        margin-right: 1rem;
+      }
+    }
   }
 }
 

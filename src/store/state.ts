@@ -16,4 +16,6 @@ export const state: State = {
     current: 0,
     next: 20,
   }),
+  cachePokemons: ref([]),
+  showPreview: ref(false),
 };
