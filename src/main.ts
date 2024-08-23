@@ -1,4 +1,6 @@
 import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+
 import './assets/styles/index.scss';
 import App from './App.vue';
 import PokeInput from './components/common/Input.vue';
@@ -13,5 +15,6 @@ app.component('PokeText', PokeText);
 app.component('PokeButton', PokeButton);
 
 app.use(router);
+app.use(createPinia());
 
 app.mount('#app');
