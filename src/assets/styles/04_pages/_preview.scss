@@ -110,7 +110,7 @@
     margin: 0 1.87rem;
   }
   .preview__element {
-    width: 100%;
+    width: 40%;
     border-radius: 5px;
     height: 70vh;
     background-color: map-get($colors, 'white');
@@ -198,8 +198,9 @@
     .preview__actions {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       width: 100%;
+      padding: 0px 1.87rem 1.25rem;
       .poke-button {
         margin-right: 1rem;
       }
@@ -207,31 +208,26 @@
   }
 }
 
-@media screen and (max-width: 1920px) {
-  html {
-    font-size: 120%;
-  }
-}
 @media screen and (max-width: 1440px) {
-  html {
-    font-size: 110%;
-  }
-}
-@media screen and (max-width: 1280px) {
-  html {
-    font-size: 100%;
+  .preview__element {
+    width: 50% !important;
   }
 }
 @media screen and (max-width: 1024px) {
-  html {
-    font-size: 95%;
-  }
   .preview-content {
     width: 100%;
   }
+  .preview__element {
+    width: 80% !important;
+  }
 }
-@media screen and (max-width: 767px) {
-  html {
-    font-size: 90%;
+@media screen and (max-width: 480px) {
+  .preview__element {
+    .preview__image {
+      &-content {
+        width: 50% !important;
+        height: 70% !important;
+      }
+    }
   }
 }
