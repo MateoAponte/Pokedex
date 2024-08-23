@@ -134,9 +134,18 @@
         font-size: 1.62rem;
         cursor: pointer;
       }
-      img {
+
+      &-background {
+        position: relative;
+        width: 100%;
+        height: 105%;
+        top: -7px;
+      }
+
+      &-content {
         width: 30%;
         height: 60%;
+        position: absolute;
       }
     }
     .preview__info {

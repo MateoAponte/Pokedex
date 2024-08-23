@@ -2,7 +2,12 @@
   <div class="preview__backdrop">
     <div class="preview__element">
       <div class="preview__image">
-        <img :src="props.sprite" alt="" />
+        <img
+          class="preview__image-background"
+          :src="Background"
+          alt="Background image"
+        />
+        <img class="preview__image-content" :src="props.sprite" alt="" />
         <span class="preview__close">
           <AnFilledCloseCircle @click="handleClose" />
         </span>
@@ -37,6 +42,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { Pokemon } from '../../interfaces/pokemon/Pokemon';
+import Background from '../../assets/images/background.png';
 import { AnFilledCloseCircle, BxSolidStar } from '@kalimahapps/vue-icons';
 
 const $emit = defineEmits(['close']);
