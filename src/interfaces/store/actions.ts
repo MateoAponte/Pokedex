@@ -10,9 +10,7 @@ export interface Actions {
   setCurrentPokemon: (pokemon: Pokemon) => void;
   setPagination: () => void;
   setShowPreview: (show: boolean) => void;
-  fetchPokemonTypes: (pokemon: Pokemon) => Promise<AxiosResponse<any>[]>;
-  getPokemonTypes: (types: any) => TypesApi[];
-  getSprite: (pokemon: any) => string;
+  fetchPokemonTypes: (pokemon: Pokemon) => Promise<AxiosResponse[]>;
   getPokemonsByPagination: () => Promise<AxiosResponse<ListPokemonApi>>;
   getPokemonByName: (pokemonName: string) => Promise<AxiosResponse<PokemonApi>>;
 }

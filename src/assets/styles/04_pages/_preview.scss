@@ -128,11 +128,15 @@
 
       .preview__close {
         position: absolute;
-        top: 0.93rem;
+        top: 0.2rem;
         right: 0.93rem;
         color: rgba(map-get($colors, 'white'), 0.8);
         font-size: 1.62rem;
         cursor: pointer;
+
+        &:hover {
+          color: rgba(map-get($colors, 'white'), 1);
+        }
       }
 
       &-background {

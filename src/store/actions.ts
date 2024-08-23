@@ -1,4 +1,5 @@
 import PokeApi from '../api/PokeApi';
+import { getPokemonTypes, getSprite } from '../helpers/PokeDataBuilder';
 import { Actions } from '../interfaces/store/actions';
 import { state } from './state';
 
@@ -33,17 +34,6 @@ export const actions: Actions = {
         return error;
       });
   },
-  getSprite(sprites) {
-    return sprites.versions['generation-v']
-      ? sprites.versions['generation-v']['black-white'].animated.front_default
-      : sprites.front_default;
-  },
-  getPokemonTypes(types) {
-    return types.map(
-      (elementType: any) =>
-        elementType.sprites['generation-viii']['sword-shield'].name_icon
-    );
-  },
   async fetchPokemonTypes(pokemon) {
     const promises = pokemon.types.map(
       (elementType: any) => elementType.type.url
@@ -65,12 +55,11 @@ export const actions: Actions = {
           name,
           weight,
           height,
-          sprite: this.getSprite(sprites),
+          sprite: getSprite(sprites),
           types,
         };
         const parsedTypes = await this.fetchPokemonTypes(pokemon);
-
-        const typesResources = this.getPokemonTypes(parsedTypes);
+        const typesResources = getPokemonTypes(parsedTypes);
 
         state.currentPokemon.value = { ...pokemon, types: typesResources };
         console.log(state.currentPokemon.value);
