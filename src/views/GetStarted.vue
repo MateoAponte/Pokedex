@@ -23,11 +23,24 @@
       type="common"
       alignment="center"
     />
-    <PokeButton text="Get Started" size="medium" color="red" />
+    <PokeButton
+      text="Get Started"
+      size="medium"
+      color="red"
+      @click="setCookie()"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
+import CookieManagement from '../assets/helpers/CookieManagement';
+
+const setCookie = () => {
+  console.log('Cookie');
+
+  CookieManagement.setCookie('poke-started', 'true', 15);
+};
+
 import PokeImage from '../assets/images/Item.svg';
 import PokeCircle from '../assets/images/Circle.svg';
 </script>

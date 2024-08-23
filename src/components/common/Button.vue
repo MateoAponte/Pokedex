@@ -1,14 +1,13 @@
 <template>
   <button
-    :disabled="isDisabled"
-    :class="['poke-button', colorButton, isLoading, isDisabled]"
+    :disabled="props.isDisabled"
+    :class="['poke-button', colorButton, isLoading, isDisabled, colorSize]"
   >
     {{ text }}
   </button>
 </template>
 
 <script lang="ts" setup>
-import { ButtonsColors, ButtonSize } from '@/types/Button';
 import { ButtonProps } from '../../interfaces/Button.ts';
 
 const props = defineProps<ButtonProps>();

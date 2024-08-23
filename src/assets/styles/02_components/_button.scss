@@ -8,6 +8,7 @@
   font-size: 1.1rem;
   line-height: 1.2rem;
   letter-spacing: 0.6px;
+  cursor: pointer;
 
   &--left {
     text-align: left;
@@ -17,6 +18,16 @@
   }
   &--center {
     text-align: center;
+  }
+
+  &--small {
+    width: 10rem;
+  }
+  &--medium {
+    width: 17.1rem;
+  }
+  &--large {
+    width: 22rem;
   }
 
   &--red {

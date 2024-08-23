@@ -4,7 +4,7 @@ import App from './App.vue';
 import PokeInput from './components/common/Input.vue';
 import PokeText from './components/common/Text.vue';
 import PokeButton from './components/common/Button.vue';
-import { router } from './router';
+import router from './router';
 
 const app = createApp(App);
 
