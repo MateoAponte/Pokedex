@@ -196,6 +196,7 @@
         padding: 0 0 0.62rem 0.2rem;
         margin-bottom: 0.62rem;
         border-bottom: 1px solid map-get($colors, 'border-gray');
+        flex-wrap: wrap;
 
         &__label {
           font-weight: 700;
@@ -203,7 +204,57 @@
           line-height: 1.6rem;
           margin-right: 0.8rem;
           text-transform: capitalize;
+
+          &--small {
+            font-weight: 600;
+            font-size: 0.8rem;
+            line-height: 1.6rem;
+            margin-right: 0.8rem;
+            text-transform: capitalize;
+          }
         }
+
+        &__stats {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+          padding-top: 0.3rem;
+
+          &-content {
+            display: flex;
+            flex-direction: column;
+            width: 8.8rem;
+            margin-right: 1.25rem;
+            margin-left: 1.25rem;
+            padding: 0.2rem 0;
+            transition: all 0.3s ease;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+
+          &-label {
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.3rem 0.2rem;
+            color: map-get($colors, 'white');
+            background-color: map-get($colors, 'shield');
+            text-transform: uppercase;
+
+            svg {
+              margin-right: 0.2rem;
+            }
+          }
+          &-text {
+            text-align: center;
+            border: 1.5px solid map-get($colors, 'border-gray');
+            padding: 0.2rem;
+          }
+        }
+
         &__content {
           font-weight: 500;
           font-size: 1.1rem;

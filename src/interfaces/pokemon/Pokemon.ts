@@ -1,3 +1,5 @@
+import { Stat } from './Stat';
+
 export interface Pokemon {
   name: string;
   weight: number;
@@ -6,4 +8,5 @@ export interface Pokemon {
   types: string[];
   favorite: boolean;
   id: number;
+  stats: Stat[];
 }

@@ -2,6 +2,7 @@ import PokeApi from '../api/PokeApi';
 import {
   buildCurrentPokemonData,
   getPokemonTypes,
+  getStats,
 } from '../helpers/PokeDataBuilder';
 import { Actions } from '../interfaces/store/actions';
 import { state } from './state';

@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import { PokemonApi } from '../interfaces/api/PokemonApi';
 import LocalStorageManagment from './LocalStorageManagment';
 import { Pokemon } from '../interfaces/pokemon/Pokemon';
+import { Stat } from '../interfaces/pokemon/Stat';
 
 export const getSprite = (sprites: any): string => {
   const sprite = sprites.versions['generation-v']
@@ -21,10 +22,17 @@ export const getDecenes = (id: number): string => {
   return id.toString().padStart(4, '0');
 };
 
+export const getStats = (stats: any): Stat[] => {
+  return stats.map((elementStat: any) => ({
+    stat: elementStat.base_stat,
+    name: elementStat.stat.name,
+  }));
+};
+
 export const buildCurrentPokemonData = (
   response: AxiosResponse<PokemonApi>
 ): Pokemon => {
-  const { name, weight, height, sprites, types, id } = response.data;
+  const { name, weight, height, sprites, stats, types, id } = response.data;
   const items = LocalStorageManagment.getItem(LocalStorageManagment.key);
   let parsedItems = null;
   if (items)
@@ -36,6 +44,7 @@ export const buildCurrentPokemonData = (
     sprite: getSprite(sprites),
     types,
     id,
+    stats: getStats(stats),
     favorite: parsedItems?.favorite || false,
   };
 };

@@ -29,6 +29,23 @@
             <img :src="types" alt="asdasd" />
           </span>
         </div>
+        <div class="preview__info-item">
+          <span class="preview__info-item__label"> Base stats: </span>
+          <div class="preview__info-item__stats">
+            <div
+              class="preview__info-item__stats-content"
+              v-for="stat in getStats"
+            >
+              <span class="preview__info-item__stats-label">
+                <component :is="getStatIcon(stat.name)" />
+                {{ processName(stat.name) }}
+              </span>
+              <span class="preview__info-item__stats-text">
+                {{ stat.stat }}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="preview__actions">
         <PokeButton
@@ -62,8 +79,16 @@ import { getDecenes } from '../../../helpers/PokeDataBuilder';
 
 const $emit = defineEmits(['close', 'updateFavorite', 'share', 'sharePokemon']);
 
+import { GlStatusHealth } from '@kalimahapps/vue-icons';
+import { LuSwords } from '@kalimahapps/vue-icons';
+import { FaShieldHeart } from '@kalimahapps/vue-icons';
+import { FaShieldHalved } from '@kalimahapps/vue-icons';
+import { FaExplosion } from '@kalimahapps/vue-icons';
+import { FlFilledRun } from '@kalimahapps/vue-icons';
+import { IconStat } from '../../../interfaces/pokemon/Stat';
+
 const getSummaryFields = computed(() => {
-  const { sprite, types, favorite, id, ...content } = props;
+  const { sprite, types, favorite, id, stats, ...content } = props;
   return Object.keys(content).map((key: string) => ({
     value: (content as any)[key],
     key,
@@ -73,6 +98,24 @@ const getTypes = computed(() => {
   const { types } = props;
   return types;
 });
+const getStats = computed(() => {
+  const { stats } = props;
+  return stats;
+});
+const processName = (name: string) => {
+  return name.replace(/-/g, ' ');
+};
+const getStatIcon = (name: string) => {
+  const icons: IconStat = {
+    hp: GlStatusHealth,
+    attack: LuSwords,
+    defense: FaShieldHeart,
+    'special-attack': FaExplosion,
+    'special-defense': FaShieldHalved,
+    speed: FlFilledRun,
+  };
+  return icons[name];
+};
 
 const handleShare = () => {
   $emit('sharePokemon');
