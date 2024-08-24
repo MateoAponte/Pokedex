@@ -18,6 +18,10 @@ class PokeApi {
   public getTypes(url: string) {
     return axios.get(url);
   }
+
+  public getPassives(url: string) {
+    return axios.get(url);
+  }
 }
 
 export default new PokeApi();

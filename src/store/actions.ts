@@ -1,8 +1,8 @@
 import PokeApi from '../api/PokeApi';
 import {
   buildCurrentPokemonData,
+  getPokemonPassives,
   getPokemonTypes,
-  getStats,
 } from '../helpers/PokeDataBuilder';
 import { Actions } from '../interfaces/store/actions';
 import { state } from './state';
@@ -109,17 +109,45 @@ export const actions: Actions = {
       return data;
     });
   },
+  async fetchPokemonPassives(pokemon) {
+    const promises = pokemon.passives.map((elementType: any) => ({
+      url: elementType.ability.url,
+      isHidden: elementType.is_hidden,
+    }));
+
+    return await Promise.all([
+      ...promises.map(async (passive) => {
+        const response = await PokeApi.getPassives(passive.url);
+        return {
+          ...response,
+          data: { ...response.data, isHidden: passive.isHidden },
+        };
+      }),
+    ]).then((response) => {
+      const data = response.map((element: any) => element.data);
+      return data;
+    });
+  },
   async parsedPokemonFetch(response) {
     this.setShowPreview(true);
     const pokemon = buildCurrentPokemonData(response);
+
     const parsedTypes = await this.fetchPokemonTypes(pokemon);
     const typesResources = getPokemonTypes(parsedTypes);
-    state.currentPokemon.value = { ...pokemon, types: typesResources };
+
+    const parsedPassives = await this.fetchPokemonPassives(pokemon);
+    const passivesResources = getPokemonPassives(parsedPassives);
+
+    state.currentPokemon.value = {
+      ...pokemon,
+      passives: passivesResources,
+      types: typesResources,
+    };
   },
   async getPokemonByName(pokemonName) {
     return await PokeApi.getPokemonByName(pokemonName)
       .then(async (response) => {
-        this.parsedPokemonFetch(response);
+        await this.parsedPokemonFetch(response);
         return response;
       })
       .catch((error) => {

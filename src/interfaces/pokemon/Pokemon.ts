@@ -1,4 +1,5 @@
 import { Stat } from './Stat';
+import { Passive } from './Passive';
 
 export interface Pokemon {
   name: string;
@@ -9,4 +10,5 @@ export interface Pokemon {
   favorite: boolean;
   id: number;
   stats: Stat[];
+  passives: Passive[];
 }

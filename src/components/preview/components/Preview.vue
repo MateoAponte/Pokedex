@@ -46,6 +46,29 @@
             </div>
           </div>
         </div>
+        <div class="preview__info-item">
+          <span class="preview__info-item__label"> Passive Skills: </span>
+          <div class="preview__info-item__abilities">
+            <div
+              class="preview__info-item__abilities-content"
+              v-for="passive in getPassives"
+            >
+              <span class="preview__info-item__abilities-label">
+                <div>
+                  <component :is="getStatIcon(passive.name)" />
+                  {{ passive.name }}
+                </div>
+                <component
+                  class="preview__info-item__abilities--icon"
+                  :is="getHidden(passive.isHidden)"
+                />
+              </span>
+              <span class="preview__info-item__abilities-text">
+                {{ passive.description }}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="preview__actions">
         <PokeButton
@@ -85,14 +108,18 @@ import { FaShieldHeart } from '@kalimahapps/vue-icons';
 import { FaShieldHalved } from '@kalimahapps/vue-icons';
 import { FaExplosion } from '@kalimahapps/vue-icons';
 import { FlFilledRun } from '@kalimahapps/vue-icons';
+import { PhFillGear } from '@kalimahapps/vue-icons';
 import { IconStat } from '../../../interfaces/pokemon/Stat';
+import { McIncognitoModeFill } from '@kalimahapps/vue-icons';
 
 const getSummaryFields = computed(() => {
-  const { sprite, types, favorite, id, stats, ...content } = props;
-  return Object.keys(content).map((key: string) => ({
+  const { sprite, types, favorite, id, stats, passives, ...content } = props;
+  const fields = Object.keys(content).map((key: string) => ({
     value: (content as any)[key],
     key,
   }));
+  const addDataToFields = proccessFields(fields);
+  return addDataToFields;
 });
 const getTypes = computed(() => {
   const { types } = props;
@@ -102,9 +129,17 @@ const getStats = computed(() => {
   const { stats } = props;
   return stats;
 });
+const getPassives = computed(() => {
+  const { passives } = props;
+  return passives;
+});
 const processName = (name: string) => {
   return name.replace(/-/g, ' ');
 };
+const getHidden = (isHidden: boolean) => {
+  return isHidden ? McIncognitoModeFill : null;
+};
+
 const getStatIcon = (name: string) => {
   const icons: IconStat = {
     hp: GlStatusHealth,
@@ -114,7 +149,24 @@ const getStatIcon = (name: string) => {
     'special-defense': FaShieldHalved,
     speed: FlFilledRun,
   };
-  return icons[name];
+  return icons[name] || PhFillGear;
+};
+const proccessFields = (fields: any) => {
+  return fields.map((field: any) => {
+    if (field.key === 'weight') {
+      field.value = processWeight(field.value);
+    }
+    if (field.key === 'height') {
+      field.value = processHeight(field.value);
+    }
+    return field;
+  });
+};
+const processWeight = (weight: number) => {
+  return `${weight / 10} Kg`;
+};
+const processHeight = (height: number) => {
+  return `${height / 10} mt`;
 };
 
 const handleShare = () => {

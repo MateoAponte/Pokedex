@@ -1,0 +1,14 @@
+@mixin title() {
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.3rem 0.4rem;
+  color: map-get($colors, 'white');
+  background-color: map-get($colors, 'shield');
+  text-transform: uppercase;
+}
+
+@mixin textDescription($align) {
+  text-align: $align;
+  border: 1.5px solid map-get($colors, 'border-gray');
+  padding: 0.2rem;
+}

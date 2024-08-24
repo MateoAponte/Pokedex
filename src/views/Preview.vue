@@ -91,8 +91,6 @@ const updatePreviewFavorite = (pokemon: Pokemon) => {
     setCurrentPokemon({ ...pokePreview, favorite: pokemon.favorite });
     pokePreview.favorite = pokemon.favorite;
 
-    console.log(pokePreview.favorite);
-
     pokePreview.favorite
       ? pokemonStore.addFavorites(pokePreview)
       : pokemonStore.deleteFavorites(pokePreview);

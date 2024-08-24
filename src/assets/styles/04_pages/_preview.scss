@@ -237,21 +237,57 @@
           }
 
           &-label {
-            font-weight: 600;
-            font-size: 0.8rem;
-            padding: 0.2rem 0.3rem 0.2rem;
-            color: map-get($colors, 'white');
-            background-color: map-get($colors, 'shield');
-            text-transform: uppercase;
+            @include title;
 
             svg {
               margin-right: 0.2rem;
             }
           }
           &-text {
+            @include textDescription('center');
             text-align: center;
-            border: 1.5px solid map-get($colors, 'border-gray');
-            padding: 0.2rem;
+          }
+        }
+
+        &__abilities {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+          padding-top: 0.3rem;
+          &-content {
+            margin: 0.4rem 0px;
+            margin-bottom: 1rem;
+            width: 100%;
+            display: flex;
+            transition: all 0.3s ease;
+            flex-direction: column;
+
+            &:hover {
+              transform: scale(1.03);
+            }
+          }
+
+          &-label {
+            @include title;
+            display: flex;
+            justify-content: space-between;
+
+            svg {
+              position: relative;
+              top: 0.11rem;
+            }
+          }
+          &-text {
+            @include textDescription('left');
+            font-size: 0.9rem;
+          }
+
+          &--icon {
+            font-size: 1.1rem;
+            position: relative;
+            top: 0rem !important;
           }
         }
 

@@ -14,6 +14,8 @@ export const state: State = {
     types: [],
     id: 0,
     favorite: false,
+    stats: [],
+    passives: [],
   }),
   pagination: ref({
     step: 20,

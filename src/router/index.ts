@@ -28,9 +28,7 @@ const routes = [
         const pokemonStore = usePokemonStore();
         const result = pokemonStore.getPokemonByName(name);
         result.then((response) => {
-          const pokemon = buildCurrentPokemonData(response);
-          pokemonStore.setCurrentPokemon(pokemon);
-
+          pokemonStore.parsedPokemonFetch(response);
           const currentName = to.query.name;
           if (to.query.name !== currentName) {
             next({ path: '/preview', query: { name: currentName } });
