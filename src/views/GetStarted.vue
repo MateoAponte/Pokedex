@@ -36,8 +36,6 @@
 import CookieManagement from '../helpers/CookieManagement';
 
 const setCookie = () => {
-  console.log('Cookie');
-
   CookieManagement.setCookie('poke-started', 'true', 15);
 };
 

@@ -61,8 +61,6 @@ const getNewPokemons = (executePagination: boolean) => {
   if (isLoading.value) return;
   isLoading.value = true;
   executePagination && pokemonStore.setPagination();
-  console.log(isLoading.value);
-
   pokemonStore.getPokemonsByPagination().finally(() => {
     isLoading.value = false;
   });
@@ -79,27 +77,26 @@ const setClosePreview = () => {
   pokemonStore.setShowPreview(false);
 };
 const updatePreviewFavorite = (pokemon: Pokemon) => {
-  const pokePreview = pokemons.value.find((poke) => {
-    console.log('Current: ' + poke.name + ' Id: ', poke.id);
-    console.log('Updated: ' + pokemon.name + ' Id: ', pokemon.id);
-
-    return poke.id === pokemon.id;
-  });
-
+  const pokePreview = pokemons.value.find((poke) => poke.id === pokemon.id);
   if (pokePreview) {
-    console.log('Selected: ', pokePreview.id);
     setCurrentPokemon({ ...pokePreview, favorite: pokemon.favorite });
     pokePreview.favorite = pokemon.favorite;
-    pokemonStore.addFavorites(pokePreview);
+
+    console.log(pokePreview.favorite);
+
+    pokePreview.favorite
+      ? pokemonStore.addFavorites(pokePreview)
+      : pokemonStore.deleteFavorites(pokePreview);
     pokemonStore.updatePokemonWithFavorites();
   }
+};
+
+const deleteFavorite = (pokemon: PokemonList) => {
+  pokemonStore.deleteFavorites(pokemon);
 };
 const updateFavorite = (pokemon: PokemonList) => {
   pokemonStore.addFavorites(pokemon);
   pokemonStore.updatePokemonWithFavorites();
-};
-const deleteFavorite = (pokemon: PokemonList) => {
-  pokemonStore.deleteFavorites(pokemon);
 };
 
 onMounted(() => {

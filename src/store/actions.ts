@@ -43,6 +43,10 @@ export const actions: Actions = {
     state.favorities.value = state.favorities.value.filter((poke) => {
       return poke.id !== pokemon.id;
     });
+    LocalStorageManagement.setItem(
+      LocalStorageManagement.key,
+      JSON.stringify(state.favorities.value)
+    );
   },
   setCurrentPokemon: (pokemon) => {
     const updatedPokemon = state.favorities.value.find(

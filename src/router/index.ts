@@ -22,7 +22,6 @@ const routes = [
         const result = pokemonStore.getPokemonByName(name);
         result.then((response) => {
           const pokemon = buildCurrentPokemonData(response);
-          console.log(pokemon);
           pokemonStore.setCurrentPokemon(pokemon);
 
           const currentName = to.query.name;

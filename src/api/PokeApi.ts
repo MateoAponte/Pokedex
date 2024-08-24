@@ -4,8 +4,6 @@ class PokeApi {
   public pokemonEndpoint: string;
 
   constructor() {
-    console.log(import.meta.env);
-
     this.pokemonEndpoint = import.meta.env.VITE_APP_POKEMON_ENDPOINT;
   }
 
