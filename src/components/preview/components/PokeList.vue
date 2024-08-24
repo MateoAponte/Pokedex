@@ -7,6 +7,7 @@
       :id="pokemon.id"
       @click="handleClick(pokemon)"
       @update:favorite="updateFavorite($event)"
+      @share="handleShare()"
     />
   </div>
 </template>
@@ -37,6 +38,7 @@ const updateFavorite = (pokemon: PokeItemInterface) => {
     ? $emit('updateFavorite', updatedPokemon)
     : $emit('deleteFavorite', updatedPokemon);
 };
+
 const handleClick = (pokemon: PokemonList) => {
   $emit('setPokemon', pokemon);
 };

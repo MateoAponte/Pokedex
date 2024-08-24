@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import CookieManagement from '../assets/helpers/CookieManagement';
+import CookieManagement from '../helpers/CookieManagement';
+import { before } from 'node:test';
+import { usePokemonStore } from '../store';
+import { buildCurrentPokemonData } from '../helpers/PokeDataBuilder';
 
 const routes = [
   {
@@ -8,10 +11,31 @@ const routes = [
     component: () => import('../views/GetStarted.vue'),
   },
   {
-    path: '/preview/:id',
+    path: '/preview/:name',
     alias: '/preview',
     name: 'Preview',
     component: () => import('../views/Preview.vue'),
+    beforeEnter: (to, _, next) => {
+      const name = to.query.name;
+      if (name) {
+        const pokemonStore = usePokemonStore();
+        const result = pokemonStore.getPokemonByName(name);
+        result.then((response) => {
+          const pokemon = buildCurrentPokemonData(response);
+          console.log(pokemon);
+          pokemonStore.setCurrentPokemon(pokemon);
+
+          const currentName = to.query.name;
+          if (to.query.name !== currentName) {
+            next({ path: '/preview', query: { name: currentName } });
+          } else {
+            next();
+          }
+        });
+      } else {
+        next();
+      }
+    },
   },
 ];
 

@@ -12,6 +12,8 @@ export const state: State = {
     height: 0,
     sprite: '',
     types: [],
+    id: 0,
+    favorite: false,
   }),
   pagination: ref({
     step: 20,

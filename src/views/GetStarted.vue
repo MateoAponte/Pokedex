@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts" setup>
-import CookieManagement from '../assets/helpers/CookieManagement';
+import CookieManagement from '../helpers/CookieManagement';
 
 const setCookie = () => {
   console.log('Cookie');

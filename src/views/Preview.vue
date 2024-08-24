@@ -24,7 +24,8 @@
         <Preview
           v-bind="{ ...currentPokemon }"
           @close="setClosePreview"
-          @update-favorite="updatePreviewFavorite"
+          @updateFavorite="updatePreviewFavorite"
+          @sharePokemon="copyToClipboard"
         />
       </template>
       <template #loader>
@@ -46,7 +47,8 @@ import { usePokemonStore } from '../store';
 import { storeToRefs } from 'pinia';
 import { PokemonList } from '../interfaces/pokemon/PokemonList';
 import { Pokemon } from '../interfaces/pokemon/Pokemon';
-import LocalStorageManagement from '../assets/helpers/LocalStorageManagment';
+import LocalStorageManagement from '../helpers/LocalStorageManagment';
+import router from '../router';
 
 const isLoading = ref(false);
 
@@ -66,14 +68,26 @@ const getNewPokemons = (executePagination: boolean) => {
   });
 };
 const setCurrentPokemon = (pokemon: PokemonList) => {
-  pokemonStore.getPokemonByName(pokemon.name, pokemon.id);
+  router.replace({ path: '/preview', query: { name: pokemon.name } });
+  pokemonStore.getPokemonByName(pokemon.name);
+};
+const copyToClipboard = async () => {
+  navigator.clipboard.writeText(window.location.href);
 };
 const setClosePreview = () => {
+  router.replace({ path: '/preview' });
   pokemonStore.setShowPreview(false);
 };
 const updatePreviewFavorite = (pokemon: Pokemon) => {
-  const pokePreview = pokemons.value.find((poke) => poke.id === pokemon.id);
+  const pokePreview = pokemons.value.find((poke) => {
+    console.log('Current: ' + poke.name + ' Id: ', poke.id);
+    console.log('Updated: ' + pokemon.name + ' Id: ', pokemon.id);
+
+    return poke.id === pokemon.id;
+  });
+
   if (pokePreview) {
+    console.log('Selected: ', pokePreview.id);
     setCurrentPokemon({ ...pokePreview, favorite: pokemon.favorite });
     pokePreview.favorite = pokemon.favorite;
     pokemonStore.addFavorites(pokePreview);

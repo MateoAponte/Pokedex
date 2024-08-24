@@ -18,8 +18,6 @@ export interface Actions {
   setFilter: (filter: string) => void;
   resetPokemons: () => void;
   getPokemonsByPagination: () => Promise<AxiosResponse<ListPokemonApi>>;
-  getPokemonByName: (
-    pokemonName: string,
-    id: number
-  ) => Promise<AxiosResponse<PokemonApi>>;
+  getPokemonByName: (pokemonName: string) => Promise<AxiosResponse<PokemonApi>>;
+  parsedPokemonFetch: (response: AxiosResponse<PokemonApi>) => Promise<void>;
 }

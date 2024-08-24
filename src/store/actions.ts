@@ -1,9 +1,12 @@
 import PokeApi from '../api/PokeApi';
-import { getPokemonTypes, getSprite } from '../helpers/PokeDataBuilder';
+import {
+  buildCurrentPokemonData,
+  getPokemonTypes,
+} from '../helpers/PokeDataBuilder';
 import { Pokemon } from '../interfaces/pokemon/Pokemon';
 import { Actions } from '../interfaces/store/actions';
 import { state } from './state';
-import LocalStorageManagement from '../assets/helpers/LocalStorageManagment';
+import LocalStorageManagement from '../helpers/LocalStorageManagment';
 
 export const actions: Actions = {
   setPokemons: (pokemons) => {
@@ -45,7 +48,6 @@ export const actions: Actions = {
     const updatedPokemon = state.favorities.value.find(
       (poke) => poke.id === pokemon.id
     );
-    console.log(pokemon);
 
     state.currentPokemon.value = updatedPokemon
       ? { ...pokemon, favorite: true }
@@ -81,7 +83,7 @@ export const actions: Actions = {
           (pokemon, index) => {
             return pokemon.id
               ? { ...pokemon, favorite: false }
-              : { ...pokemon, id: index, favorite: false };
+              : { ...pokemon, id: index + 1, favorite: false };
           }
         );
         state.pokemons.value = [...state.cachePokemons.value];
@@ -103,27 +105,18 @@ export const actions: Actions = {
       return data;
     });
   },
-  async getPokemonByName(pokemonName, id) {
+  async parsedPokemonFetch(response) {
+    this.setShowPreview(true);
+    const pokemon = buildCurrentPokemonData(response);
+    const parsedTypes = await this.fetchPokemonTypes(pokemon);
+    const typesResources = getPokemonTypes(parsedTypes);
+    state.currentPokemon.value = { ...pokemon, types: typesResources };
+  },
+  async getPokemonByName(pokemonName) {
     return await PokeApi.getPokemonByName(pokemonName)
       .then(async (response) => {
-        this.setShowPreview(true);
-        const { name, weight, height, sprites, types } = response.data;
-        const favoritePokemon = state.favorities.value.find(
-          (pokemon) => pokemon.id === id
-        );
-        const pokemon: Pokemon = {
-          name,
-          weight,
-          height,
-          sprite: getSprite(sprites),
-          types,
-          favorite: favoritePokemon?.favorite || false,
-          id,
-        };
-        const parsedTypes = await this.fetchPokemonTypes(pokemon);
-        const typesResources = getPokemonTypes(parsedTypes);
-
-        state.currentPokemon.value = { ...pokemon, types: typesResources };
+        this.parsedPokemonFetch(response);
+        return response;
       })
       .catch((error) => {
         this.setShowPreview(false);

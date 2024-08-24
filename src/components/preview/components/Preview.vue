@@ -31,7 +31,12 @@
         </div>
       </div>
       <div class="preview__actions">
-        <PokeButton text="Share to my friends" color="red" size="medium" />
+        <PokeButton
+          text="Share to my friends"
+          color="red"
+          size="medium"
+          @click="handleShare"
+        />
         <div
           :class="[
             'poke-rate',
@@ -55,10 +60,10 @@ import Background from '../../../assets/images/background.png';
 import { AnFilledCloseCircle, BxSolidStar } from '@kalimahapps/vue-icons';
 import { getDecenes } from '../../../helpers/PokeDataBuilder';
 
-const $emit = defineEmits(['close', 'updateFavorite']);
+const $emit = defineEmits(['close', 'updateFavorite', 'share', 'sharePokemon']);
 
 const getSummaryFields = computed(() => {
-  const { sprite, types, id, ...content } = props;
+  const { sprite, types, favorite, id, ...content } = props;
   return Object.keys(content).map((key) => ({ value: content[key], key }));
 });
 const getTypes = computed(() => {
@@ -66,6 +71,9 @@ const getTypes = computed(() => {
   return types;
 });
 
+const handleShare = () => {
+  $emit('sharePokemon');
+};
 const handleClose = () => {
   $emit('close');
 };

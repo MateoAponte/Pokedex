@@ -9,7 +9,7 @@
       </div>
     </div>
   </div>
-  <div v-show="props.show">
+  <div v-if="props.show">
     <slot name="preview" />
   </div>
   <slot name="controllers" />
