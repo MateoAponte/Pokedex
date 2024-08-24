@@ -10,13 +10,22 @@
         <Filter />
       </template>
       <template #information>
-        <PokeList :list="pokemons" @setPokemon="setCurrentPokemon" />
+        <PokeList
+          :list="pokemons"
+          @setPokemon="setCurrentPokemon"
+          @updateFavorite="updateFavorite"
+          @deleteFavorite="deleteFavorite"
+        />
       </template>
       <template #controllers>
         <Controllers />
       </template>
       <template #preview>
-        <Preview v-bind="{ ...currentPokemon }" @close="setClosePreview" />
+        <Preview
+          v-bind="{ ...currentPokemon }"
+          @close="setClosePreview"
+          @update-favorite="updatePreviewFavorite"
+        />
       </template>
       <template #loader>
         <Loader />
@@ -36,6 +45,8 @@ import { onMounted, ref } from 'vue';
 import { usePokemonStore } from '../store';
 import { storeToRefs } from 'pinia';
 import { PokemonList } from '../interfaces/pokemon/PokemonList';
+import { Pokemon } from '../interfaces/pokemon/Pokemon';
+import LocalStorageManagement from '../assets/helpers/LocalStorageManagment';
 
 const isLoading = ref(false);
 
@@ -55,13 +66,31 @@ const getNewPokemons = (executePagination: boolean) => {
   });
 };
 const setCurrentPokemon = (pokemon: PokemonList) => {
-  pokemonStore.getPokemonByName(pokemon.name);
+  pokemonStore.getPokemonByName(pokemon.name, pokemon.id);
 };
 const setClosePreview = () => {
   pokemonStore.setShowPreview(false);
 };
+const updatePreviewFavorite = (pokemon: Pokemon) => {
+  const pokePreview = pokemons.value.find((poke) => poke.id === pokemon.id);
+  if (pokePreview) {
+    setCurrentPokemon({ ...pokePreview, favorite: pokemon.favorite });
+    pokePreview.favorite = pokemon.favorite;
+    pokemonStore.addFavorites(pokePreview);
+    pokemonStore.updatePokemonWithFavorites();
+  }
+};
+const updateFavorite = (pokemon: PokemonList) => {
+  pokemonStore.addFavorites(pokemon);
+  pokemonStore.updatePokemonWithFavorites();
+};
+const deleteFavorite = (pokemon: PokemonList) => {
+  pokemonStore.deleteFavorites(pokemon);
+};
 
 onMounted(() => {
+  const favorites = LocalStorageManagement.getItem(LocalStorageManagement.key);
+  if (favorites) pokemonStore.setFavorites(JSON.parse(favorites));
   getNewPokemons(false);
 });
 </script>

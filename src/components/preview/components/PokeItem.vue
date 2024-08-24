@@ -1,10 +1,21 @@
 <template>
   <div class="poke-item">
     <span class="poke-item__name">
-      <span class="poke-item__tag"> # {{ getDecenes }} </span>
+      <span class="poke-item__tag"> # {{ getDecenes(props.id) }} </span>
       {{ props.pokemon.name }}
     </span>
-    <span class="poke-item__rate poke-rate">
+    <span
+      :class="[
+        'poke-item__rate poke-rate',
+        props.pokemon.favorite ? 'poke-rate--checked' : 'poke-rate--unchecked',
+      ]"
+      @click="
+        $emit('update:favorite', {
+          ...props,
+          favorite: !props.pokemon.favorite,
+        })
+      "
+    >
       <BxSolidStar />
     </span>
   </div>
@@ -13,12 +24,9 @@
 <script lang="ts" setup>
 import { BxSolidStar } from '@kalimahapps/vue-icons';
 import { PokeItem } from '../../../interfaces/components/PokeItem';
-import { computed } from 'vue';
+import { getDecenes } from '../../../helpers/PokeDataBuilder';
 
 const props = defineProps<PokeItem>();
 
-const getDecenes = computed(() => {
-  const realNumber = props.id + 1;
-  return realNumber.toString().padStart(4, '0');
-});
+const $emit = defineEmits(['update:favorite']);
 </script>

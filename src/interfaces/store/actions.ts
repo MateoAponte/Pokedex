@@ -2,11 +2,14 @@ import { AxiosResponse } from 'axios';
 import { Pokemon } from '../pokemon/Pokemon';
 import { PokemonList } from '../pokemon/PokemonList';
 import { ListPokemonApi, PokemonApi } from '../api/PokemonApi';
-import { ListTypesApi, TypesApi } from '../api/TypesApi';
 
 export interface Actions {
   setPokemons: (pokemons: PokemonList[]) => void;
+  addFavorites: (pokemons: PokemonList) => void;
   setFavorites: (pokemons: PokemonList[]) => void;
+  deleteFavorites: (pokemons: PokemonList) => void;
+  setLocalStorageFavorites: (pokemons: PokemonList[]) => void;
+  updatePokemonWithFavorites: () => void;
   setCurrentPokemon: (pokemon: Pokemon) => void;
   setPagination: () => void;
   setShowPreview: (show: boolean) => void;
@@ -15,5 +18,8 @@ export interface Actions {
   setFilter: (filter: string) => void;
   resetPokemons: () => void;
   getPokemonsByPagination: () => Promise<AxiosResponse<ListPokemonApi>>;
-  getPokemonByName: (pokemonName: string) => Promise<AxiosResponse<PokemonApi>>;
+  getPokemonByName: (
+    pokemonName: string,
+    id: number
+  ) => Promise<AxiosResponse<PokemonApi>>;
 }

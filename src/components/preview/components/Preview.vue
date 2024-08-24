@@ -7,6 +7,7 @@
           :src="Background"
           alt="Background image"
         />
+        <span class="preview__image-tag"> # {{ getDecenes(props.id) }} </span>
         <img class="preview__image-content" :src="props.sprite" alt="" />
         <span class="preview__close">
           <AnFilledCloseCircle @click="handleClose" />
@@ -31,7 +32,15 @@
       </div>
       <div class="preview__actions">
         <PokeButton text="Share to my friends" color="red" size="medium" />
-        <div class="poke-rate">
+        <div
+          :class="[
+            'poke-rate',
+            props.favorite ? 'poke-rate--checked' : 'poke-rate--unchecked',
+          ]"
+          @click="
+            $emit('updateFavorite', { ...props, favorite: !props.favorite })
+          "
+        >
           <BxSolidStar />
         </div>
       </div>
@@ -44,11 +53,12 @@ import { computed } from 'vue';
 import { Pokemon } from '../../../interfaces/pokemon/Pokemon';
 import Background from '../../../assets/images/background.png';
 import { AnFilledCloseCircle, BxSolidStar } from '@kalimahapps/vue-icons';
+import { getDecenes } from '../../../helpers/PokeDataBuilder';
 
-const $emit = defineEmits(['close']);
+const $emit = defineEmits(['close', 'updateFavorite']);
 
 const getSummaryFields = computed(() => {
-  const { sprite, types, ...content } = props;
+  const { sprite, types, id, ...content } = props;
   return Object.keys(content).map((key) => ({ value: content[key], key }));
 });
 const getTypes = computed(() => {

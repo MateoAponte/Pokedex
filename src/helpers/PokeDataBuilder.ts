@@ -10,3 +10,8 @@ export const getPokemonTypes = (types: any) => {
       elementType.sprites['generation-viii']['sword-shield'].name_icon
   );
 };
+
+export const getDecenes = (id: number) => {
+  const realNumber = id + 1;
+  return realNumber.toString().padStart(4, '0');
+};

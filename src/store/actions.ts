@@ -1,17 +1,55 @@
 import PokeApi from '../api/PokeApi';
 import { getPokemonTypes, getSprite } from '../helpers/PokeDataBuilder';
+import { Pokemon } from '../interfaces/pokemon/Pokemon';
 import { Actions } from '../interfaces/store/actions';
 import { state } from './state';
+import LocalStorageManagement from '../assets/helpers/LocalStorageManagment';
 
 export const actions: Actions = {
   setPokemons: (pokemons) => {
     state.pokemons.value = pokemons;
   },
-  setFavorites: (favorities) => {
-    state.favorities.value = favorities;
+  setLocalStorageFavorites: (pokemons) => {
+    LocalStorageManagement.setItem(
+      LocalStorageManagement.key,
+      JSON.stringify(pokemons)
+    );
+  },
+  addFavorites: (pokemon) => {
+    state.favorities.value.push(pokemon);
+    state.favorities.value = state.favorities.value.sort((a, b) => {
+      return a.id - b.id;
+    });
+    actions.setLocalStorageFavorites(state.favorities?.value);
+  },
+  setFavorites: (favorites) => {
+    state.favorities.value = favorites;
+    actions.setLocalStorageFavorites(favorites);
+  },
+  updatePokemonWithFavorites: () => {
+    state.pokemons.value.forEach((pokemon, index) => {
+      const updatedPokemon = state.favorities.value.find(
+        (poke) => poke.id === pokemon.id
+      );
+      if (updatedPokemon) {
+        state.pokemons.value[index].favorite = true;
+      }
+    });
+  },
+  deleteFavorites: (pokemon) => {
+    state.favorities.value = state.favorities.value.filter((poke) => {
+      return poke.id !== pokemon.id;
+    });
   },
   setCurrentPokemon: (pokemon) => {
-    state.currentPokemon.value = pokemon;
+    const updatedPokemon = state.favorities.value.find(
+      (poke) => poke.id === pokemon.id
+    );
+    console.log(pokemon);
+
+    state.currentPokemon.value = updatedPokemon
+      ? { ...pokemon, favorite: true }
+      : pokemon;
   },
   setPagination: () => {
     state.pagination.value = {
@@ -41,10 +79,13 @@ export const actions: Actions = {
         state.cachePokemons.value.push(...response.data.results);
         state.cachePokemons.value = state.cachePokemons.value.map(
           (pokemon, index) => {
-            return pokemon.id ? { ...pokemon } : { ...pokemon, id: index };
+            return pokemon.id
+              ? { ...pokemon, favorite: false }
+              : { ...pokemon, id: index, favorite: false };
           }
         );
         state.pokemons.value = [...state.cachePokemons.value];
+        this.updatePokemonWithFavorites();
       })
       .catch((error) => {
         return error;
@@ -62,17 +103,22 @@ export const actions: Actions = {
       return data;
     });
   },
-  async getPokemonByName(pokemonName) {
+  async getPokemonByName(pokemonName, id) {
     return await PokeApi.getPokemonByName(pokemonName)
       .then(async (response) => {
         this.setShowPreview(true);
-        const { name, weight, height, sprites, types, id } = response.data;
-        const pokemon = {
+        const { name, weight, height, sprites, types } = response.data;
+        const favoritePokemon = state.favorities.value.find(
+          (pokemon) => pokemon.id === id
+        );
+        const pokemon: Pokemon = {
           name,
           weight,
           height,
           sprite: getSprite(sprites),
           types,
+          favorite: favoritePokemon?.favorite || false,
+          id,
         };
         const parsedTypes = await this.fetchPokemonTypes(pokemon);
         const typesResources = getPokemonTypes(parsedTypes);

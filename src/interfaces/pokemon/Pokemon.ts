@@ -4,4 +4,6 @@ export interface Pokemon {
   height: number;
   sprite: string;
   types: string[];
+  favorite: boolean;
+  id: number;
 }
