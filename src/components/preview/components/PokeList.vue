@@ -7,7 +7,6 @@
       :id="pokemon.id"
       @click="handleClick(pokemon)"
       @update:favorite="updateFavorite($event)"
-      @share="handleShare()"
     />
   </div>
 </template>
@@ -33,7 +32,7 @@ const getPokemons = computed(() => {
 
 const updateFavorite = (pokemon: PokeItemInterface) => {
   const updatedPokemon = props.list.find((poke) => poke.id === pokemon.id);
-  pokemon.pokemon.favorite = pokemon.favorite;
+  pokemon.pokemon.favorite = pokemon.favorite || false;
   pokemon.favorite
     ? $emit('updateFavorite', updatedPokemon)
     : $emit('deleteFavorite', updatedPokemon);

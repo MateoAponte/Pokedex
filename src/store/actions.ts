@@ -3,7 +3,6 @@ import {
   buildCurrentPokemonData,
   getPokemonTypes,
 } from '../helpers/PokeDataBuilder';
-import { Pokemon } from '../interfaces/pokemon/Pokemon';
 import { Actions } from '../interfaces/store/actions';
 import { state } from './state';
 import LocalStorageManagement from '../helpers/LocalStorageManagment';

@@ -11,12 +11,16 @@ import { watch } from 'vue';
 
 const pokemonStore = usePokemonStore();
 
-const filter = defineModel({});
+const filter = defineModel<string>('');
 
-watch(filter, (value) => {
-  pokemonStore.setFilter(value);
-  !!filter.value
-    ? pokemonStore.filterPokemons(value)
-    : pokemonStore.resetPokemons();
+watch(filter, (value: string | undefined) => {
+  if (value !== undefined) {
+    pokemonStore.setFilter(value);
+    if (!!value) {
+      pokemonStore.filterPokemons(value);
+    } else {
+      pokemonStore.resetPokemons();
+    }
+  }
 });
 </script>

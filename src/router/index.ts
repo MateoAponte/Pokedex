@@ -1,6 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import CookieManagement from '../helpers/CookieManagement';
-import { before } from 'node:test';
+import {
+  createRouter,
+  createWebHistory,
+  NavigationGuardNext,
+  RouteLocationNormalized,
+} from 'vue-router';
 import { usePokemonStore } from '../store';
 import { buildCurrentPokemonData } from '../helpers/PokeDataBuilder';
 
@@ -15,8 +18,12 @@ const routes = [
     alias: '/preview',
     name: 'Preview',
     component: () => import('../views/Preview.vue'),
-    beforeEnter: (to, _, next) => {
-      const name = to.query.name;
+    beforeEnter: (
+      to: RouteLocationNormalized,
+      _: RouteLocationNormalized,
+      next: NavigationGuardNext
+    ) => {
+      const name = to.query.name as string;
       if (name) {
         const pokemonStore = usePokemonStore();
         const result = pokemonStore.getPokemonByName(name);

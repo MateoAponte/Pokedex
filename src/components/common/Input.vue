@@ -9,21 +9,23 @@ const props = defineProps<InputProps>();
 const modelValue = defineModel<string>();
 
 const onFocus = ref<boolean>(false);
-const input = ref(null);
+const input = ref<HTMLElement | null>(null);
 
 const isError = computed(() => (props.isError ? 'poke-input--error ' : ''));
 const isFocus = computed(() => (onFocus.value ? 'poke-input--focus ' : ''));
 
 const handleClick = (event: Event) => {
-  if (input.value && input.value.contains(event.target)) {
+  const target = event.target as HTMLElement;
+  if (input.value && input.value.contains(target)) {
     onFocus.value = true;
   } else {
     onFocus.value = false;
   }
 };
 const emitValue = (event: Event) => {
-  if (event.target) {
-    modelValue.value = event.target.value;
+  const target = event.target as HTMLInputElement;
+  if (target) {
+    modelValue.value = target.value;
   }
 };
 

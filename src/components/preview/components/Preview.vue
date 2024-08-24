@@ -64,7 +64,10 @@ const $emit = defineEmits(['close', 'updateFavorite', 'share', 'sharePokemon']);
 
 const getSummaryFields = computed(() => {
   const { sprite, types, favorite, id, ...content } = props;
-  return Object.keys(content).map((key) => ({ value: content[key], key }));
+  return Object.keys(content).map((key: string) => ({
+    value: (content as any)[key],
+    key,
+  }));
 });
 const getTypes = computed(() => {
   const { types } = props;
