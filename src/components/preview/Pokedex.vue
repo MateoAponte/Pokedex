@@ -3,7 +3,7 @@
     <slot name="filter" />
     <slot name="noContent" />
     <slot name="information" />
-    <div ref="loadMoreTrigger" v-if="!props.isFiltered">
+    <div ref="loadMoreTrigger" v-if="showLoader">
       <div class="preview__loader">
         <slot name="loader" />
       </div>
@@ -16,8 +16,9 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { Pokedex } from '../../interfaces/components/Pokedex';
+import { MODE } from '../../constants/mode';
 
 const $emits = defineEmits(['loadNewContent']);
 
@@ -25,6 +26,10 @@ const props = defineProps<Pokedex>();
 
 const previewContent = ref<HTMLElement | null>(null);
 const loadMoreTrigger = ref<HTMLElement | null>(null);
+
+const showLoader = computed(() => {
+  return !props.isFiltered && props.mode === MODE.ALL;
+});
 
 const handleScroll = () => {
   const trigger = loadMoreTrigger.value;

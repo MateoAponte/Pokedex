@@ -13,12 +13,21 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
 import { ButtonProps } from '../../interfaces/Button.ts';
 
 const props = defineProps<ButtonProps>();
 
-const isLoading = props.isLoading ? 'poke-button--loading ' : '';
-const isDisabled = props.isDisabled ? 'poke-button--disabled ' : '';
-const colorButton = `poke-button--${props.color}`;
-const colorSize = `poke-button--${props.size}`;
+const isLoading = computed(() => {
+  return props.isLoading ? 'poke-button--loading ' : '';
+});
+const isDisabled = computed(() => {
+  return props.isDisabled ? 'poke-button--disabled ' : '';
+});
+const colorButton = computed(() => {
+  return `poke-button--${props.color}`;
+});
+const colorSize = computed(() => {
+  return `poke-button--${props.size}`;
+});
 </script>

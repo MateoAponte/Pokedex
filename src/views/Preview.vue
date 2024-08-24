@@ -2,6 +2,7 @@
   <div class="preview">
     <Pokedex
       :show="showPreview"
+      :mode="mode"
       :isLoading="isLoading"
       :isFiltered="!!filter"
       @loadNewContent="getNewPokemons"
@@ -18,7 +19,7 @@
         />
       </template>
       <template #controllers>
-        <Controllers />
+        <Controllers @changeContent="changeContent" :mode="mode" />
       </template>
       <template #preview>
         <Preview
@@ -49,13 +50,21 @@ import { PokemonList } from '../interfaces/pokemon/PokemonList';
 import { Pokemon } from '../interfaces/pokemon/Pokemon';
 import LocalStorageManagement from '../helpers/LocalStorageManagment';
 import router from '../router';
+import { MODE } from '../constants/mode';
 
 const isLoading = ref(false);
+const mode = ref<MODE>(MODE.ALL);
 
 const pokemonStore = usePokemonStore();
 
-const { pokemons, currentPokemon, showPreview, filter } =
-  storeToRefs(pokemonStore);
+const {
+  pokemons,
+  currentPokemon,
+  showPreview,
+  filter,
+  favorities,
+  cachePokemons,
+} = storeToRefs(pokemonStore);
 
 const getNewPokemons = (executePagination: boolean) => {
   if (isLoading.value) return;
@@ -97,6 +106,13 @@ const deleteFavorite = (pokemon: PokemonList) => {
 const updateFavorite = (pokemon: PokemonList) => {
   pokemonStore.addFavorites(pokemon);
   pokemonStore.updatePokemonWithFavorites();
+};
+
+const changeContent = (modeContent: MODE) => {
+  mode.value = modeContent;
+  modeContent === MODE.ALL
+    ? pokemonStore.setPokemons(cachePokemons.value)
+    : pokemonStore.setPokemons(favorities.value);
 };
 
 onMounted(() => {
