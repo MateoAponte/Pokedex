@@ -19,13 +19,13 @@ export default defineConfig({
         assetFileNames: (assetInfo) => {
           // Aquí organizamos los assets según su tipo
           if (/\.(png|jpe?g|gif|svg|webp)$/.test(assetInfo.name ?? '')) {
-            return 'assets/images/[name]-[hash][extname]';
+            return 'assets/images/[name][extname]';
           }
           if (/\.css$/.test(assetInfo.name ?? '')) {
-            return 'assets/styles/[name]-[hash][extname]';
+            return 'assets/styles/[name][extname]';
           }
           // Otros tipos de assets pueden manejarse aquí
-          return 'assets/[name]-[hash][extname]';
+          return 'assets/[name][extname]';
         },
       },
     },
