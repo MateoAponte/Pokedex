@@ -33,12 +33,13 @@
 </template>
 
 <script lang="ts" setup>
+import PokeImage from '../assets/images/Item.svg';
+import PokeCircle from '../assets/images/Circle.svg';
+import router from '../router/index';
 import CookieManagement from '../helpers/CookieManagement';
 
 const setCookie = () => {
   CookieManagement.setCookie('poke-started', 'true', 15);
+  router.push('/preview');
 };
-
-import PokeImage from '../assets/images/Item.svg';
-import PokeCircle from '../assets/images/Circle.svg';
 </script>
