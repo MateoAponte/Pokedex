@@ -60,7 +60,7 @@ export const actions: Actions = {
   setPagination: () => {
     state.pagination.value = {
       current: state.pagination.value.current + state.pagination.value.step,
-      next: state.pagination.value.step + 20,
+      next: state.pagination.value.step,
       step: state.pagination.value.step,
     };
   },

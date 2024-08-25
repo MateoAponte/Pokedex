@@ -281,7 +281,9 @@
           }
           &-text {
             @include textDescription('left');
-            font-size: 0.9rem;
+            font-size: 1rem;
+            letter-spacing: 0.05rem;
+            line-height: 1.4rem;
           }
 
           &--icon {
