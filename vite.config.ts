@@ -14,6 +14,20 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    assetsDir: 'assets', // Directorio para los assets dentro de dist
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          // Aquí organizamos los assets según su tipo
+          if (/\.(png|jpe?g|gif|svg|webp)$/.test(assetInfo.name ?? '')) {
+            return 'assets/images/[name]-[hash][extname]';
+          }
+          if (/\.css$/.test(assetInfo.name ?? '')) {
+            return 'assets/styles/[name]-[hash][extname]';
+          }
+          // Otros tipos de assets pueden manejarse aquí
+          return 'assets/[name]-[hash][extname]';
+        },
+      },
+    },
   },
 });
