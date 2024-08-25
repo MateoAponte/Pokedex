@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
-import { Pokemon } from '../pokemon/Pokemon';
-import { PokemonList } from '../pokemon/PokemonList';
-import { ListPokemonApi, PokemonApi } from '../api/PokemonApi';
+import { Pokemon } from '@/interfaces/pokemon/Pokemon';
+import { PokemonList } from '@/interfaces/pokemon/PokemonList';
+import { ListPokemonApi, PokemonApi } from '@/interfaces/api/PokemonApi';
 
 export interface Actions {
   setPokemons: (pokemons: PokemonList[]) => void;

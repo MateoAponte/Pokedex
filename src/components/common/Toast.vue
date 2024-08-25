@@ -3,7 +3,7 @@
 <script lang="ts" setup>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-import { PokeNotification } from '../../interfaces/components/PokeNotification';
+import { PokeNotification } from '@/interfaces/components/PokeNotification';
 import { watch } from 'vue';
 
 const props = defineProps<PokeNotification>();

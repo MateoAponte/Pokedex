@@ -1,5 +1,5 @@
 import { Component, Ref } from 'vue';
-import { InputTypes } from '../types/Input';
+import { InputTypes } from '@/types/Input';
 
 export interface InputProps {
   label?: string;

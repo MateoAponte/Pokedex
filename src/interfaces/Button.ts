@@ -1,5 +1,5 @@
 import { Component } from 'vue';
-import { ButtonsColors, ButtonSize } from '../types/Button';
+import { ButtonsColors, ButtonSize } from '@/types/Button';
 
 export interface ButtonProps {
   text: string;

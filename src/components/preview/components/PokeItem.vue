@@ -23,8 +23,8 @@
 
 <script lang="ts" setup>
 import { BxSolidStar } from '@kalimahapps/vue-icons';
-import { PokeItem } from '../../../interfaces/components/PokeItem';
-import { getDecenes } from '../../../helpers/PokeDataBuilder';
+import { PokeItem } from '@/interfaces/components/PokeItem';
+import { getDecenes } from '@/helpers/PokeDataBuilder';
 
 const props = defineProps<PokeItem>();
 

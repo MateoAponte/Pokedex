@@ -1,4 +1,4 @@
-import { PokemonList } from '../pokemon/PokemonList';
+import { PokemonList } from '@/interfaces/pokemon/PokemonList';
 
 export interface ListPokemonApi {
   count: number;

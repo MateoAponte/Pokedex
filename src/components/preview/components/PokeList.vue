@@ -13,10 +13,10 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { PokeItem as PokeItemInterface } from '../../../interfaces/components/PokeItem';
-import { PokeList } from '../../../interfaces/components/Pokelist';
-import { PokemonList } from '../../../interfaces/pokemon/PokemonList';
-import { usePokemonStore } from '../../../store';
+import { PokeItem as PokeItemInterface } from '@/interfaces/components/PokeItem';
+import { PokeList } from '@/interfaces/components/Pokelist';
+import { PokemonList } from '@/interfaces/pokemon/PokemonList';
+import { usePokemonStore } from '@/store';
 import PokeItem from './PokeItem.vue';
 
 const pokemonStore = usePokemonStore();

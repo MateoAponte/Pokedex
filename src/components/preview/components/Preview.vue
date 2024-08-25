@@ -95,10 +95,10 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { Pokemon } from '../../../interfaces/pokemon/Pokemon';
-import Background from '../../../assets/images/background.png';
+import { Pokemon } from '@/interfaces/pokemon/Pokemon';
+import Background from '@/assets/images/background.png';
 import { AnFilledCloseCircle, BxSolidStar } from '@kalimahapps/vue-icons';
-import { getDecenes } from '../../../helpers/PokeDataBuilder';
+import { getDecenes } from '@/helpers/PokeDataBuilder';
 
 const $emit = defineEmits(['close', 'updateFavorite', 'share', 'sharePokemon']);
 
@@ -109,7 +109,7 @@ import { FaShieldHalved } from '@kalimahapps/vue-icons';
 import { FaExplosion } from '@kalimahapps/vue-icons';
 import { FlFilledRun } from '@kalimahapps/vue-icons';
 import { PhFillGear } from '@kalimahapps/vue-icons';
-import { IconStat } from '../../../interfaces/pokemon/Stat';
+import { IconStat } from '@/interfaces/pokemon/Stat';
 import { McIncognitoModeFill } from '@kalimahapps/vue-icons';
 
 const getSummaryFields = computed(() => {

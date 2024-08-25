@@ -1,7 +1,7 @@
 import { Ref } from 'vue';
-import { Pokemon } from '../pokemon/Pokemon';
-import { PokemonList } from '../pokemon/PokemonList';
-import { Pagination } from '../api/Pagination';
+import { Pokemon } from '@/interfaces/pokemon/Pokemon';
+import { PokemonList } from '@/interfaces/pokemon/PokemonList';
+import { Pagination } from '@/interfaces/api/Pagination';
 
 export interface State {
   cachePokemons: Ref<PokemonList[]>;

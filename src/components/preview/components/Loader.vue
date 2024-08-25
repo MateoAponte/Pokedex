@@ -7,5 +7,5 @@
 </template>
 
 <script lang="ts" setup>
-import Loader from '../../../assets/images/Loader.svg';
+import Loader from '@/assets/images/Loader.svg';
 </script>

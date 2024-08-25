@@ -1,12 +1,12 @@
-import PokeApi from '../api/PokeApi';
+import PokeApi from '@/api/PokeApi';
 import {
   buildCurrentPokemonData,
   getPokemonPassives,
   getPokemonTypes,
-} from '../helpers/PokeDataBuilder';
-import { Actions } from '../interfaces/store/actions';
+} from '@/helpers/PokeDataBuilder';
+import { Actions } from '@/interfaces/store/actions';
 import { state } from './state';
-import LocalStorageManagement from '../helpers/LocalStorageManagment';
+import LocalStorageManagement from '@/helpers/LocalStorageManagment';
 
 export const actions: Actions = {
   setPokemons: (pokemons) => {

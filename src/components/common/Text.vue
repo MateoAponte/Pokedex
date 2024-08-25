@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { TextProps } from '../..//interfaces/Text.ts';
+import { TextProps } from '@//interfaces/Text.ts';
 
 const props = defineProps<TextProps>();
 const textAlign = props.alignment ? `poke-button--${props.alignment}` : '';

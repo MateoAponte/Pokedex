@@ -23,8 +23,8 @@
 import { BxListUl } from '@kalimahapps/vue-icons';
 import { AkStar } from '@kalimahapps/vue-icons';
 
-import { PokeControllers } from '../../../interfaces/components/PokeControllers';
-import { MODE } from '../../../constants/mode.ts';
+import { PokeControllers } from '@/interfaces/components/PokeControllers';
+import { MODE } from '@/constants/mode.ts';
 
 const props = defineProps<PokeControllers>();
 

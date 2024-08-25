@@ -42,20 +42,20 @@
 </template>
 
 <script lang="ts" setup>
-import Pokedex from '../components/preview/Pokedex.vue';
-import Filter from '../components/preview/components/Filter.vue';
-import PokeList from '../components/preview/components/PokeList.vue';
-import Controllers from '../components/preview/components/Controllers.vue';
-import Loader from '../components/preview/components/Loader.vue';
-import Preview from '../components/preview/components/Preview.vue';
+import Pokedex from '@/components/preview/Pokedex.vue';
+import Filter from '@/components/preview/components/Filter.vue';
+import PokeList from '@/components/preview/components/PokeList.vue';
+import Controllers from '@/components/preview/components/Controllers.vue';
+import Loader from '@/components/preview/components/Loader.vue';
+import Preview from '@/components/preview/components/Preview.vue';
 import { onMounted, ref } from 'vue';
-import { usePokemonStore } from '../store';
+import { usePokemonStore } from '@/store';
 import { storeToRefs } from 'pinia';
-import { PokemonList } from '../interfaces/pokemon/PokemonList';
-import { Pokemon } from '../interfaces/pokemon/Pokemon';
-import LocalStorageManagement from '../helpers/LocalStorageManagment';
-import router from '../router';
-import { MODE } from '../constants/mode';
+import { PokemonList } from '@/interfaces/pokemon/PokemonList';
+import { Pokemon } from '@/interfaces/pokemon/Pokemon';
+import LocalStorageManagement from '@/helpers/LocalStorageManagment';
+import router from '@/router';
+import { MODE } from '@/constants/mode';
 
 const isLoading = ref(false);
 const mode = ref<MODE>(MODE.ALL);

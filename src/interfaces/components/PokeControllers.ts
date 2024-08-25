@@ -1,4 +1,4 @@
-import { MODE } from '../../constants/mode';
+import { MODE } from '@/constants/mode';
 
 export interface PokeControllers {
   mode: MODE;

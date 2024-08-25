@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { ButtonProps } from '../../interfaces/Button.ts';
+import { ButtonProps } from '@/interfaces/Button.ts';
 
 const props = defineProps<ButtonProps>();
 

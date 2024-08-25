@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue';
-import { InputProps } from '../../interfaces/Input.ts';
+import { InputProps } from '@/interfaces/Input.ts';
 
 const $emit = defineEmits(['update:value']);
 const props = defineProps<InputProps>();

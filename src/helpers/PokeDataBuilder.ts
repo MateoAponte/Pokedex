@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
-import { PokemonApi } from '../interfaces/api/PokemonApi';
+import { PokemonApi } from '@/interfaces/api/PokemonApi';
 import LocalStorageManagment from './LocalStorageManagment';
-import { Pokemon } from '../interfaces/pokemon/Pokemon';
-import { Stat } from '../interfaces/pokemon/Stat';
-import { Passive } from '../interfaces/pokemon/Passive';
+import { Pokemon } from '@/interfaces/pokemon/Pokemon';
+import { Stat } from '@/interfaces/pokemon/Stat';
+import { Passive } from '@/interfaces/pokemon/Passive';
 
 export const getSprite = (sprites: any): string => {
   const sprite = sprites.versions['generation-v']

@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { BxSearch } from '@kalimahapps/vue-icons';
-import { usePokemonStore } from '../../../store';
+import { usePokemonStore } from '@/store';
 import { watch } from 'vue';
 
 const pokemonStore = usePokemonStore();

@@ -17,8 +17,8 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue';
-import { Pokedex } from '../../interfaces/components/Pokedex';
-import { MODE } from '../../constants/mode';
+import { Pokedex } from '@/interfaces/components/Pokedex';
+import { MODE } from '@/constants/mode';
 
 const $emits = defineEmits(['loadNewContent']);
 

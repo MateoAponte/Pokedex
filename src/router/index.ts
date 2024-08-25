@@ -4,20 +4,20 @@ import {
   NavigationGuardNext,
   RouteLocationNormalized,
 } from 'vue-router';
-import { usePokemonStore } from '../store';
-import CookieManagement from '../helpers/CookieManagement';
+import { usePokemonStore } from '@/store';
+import CookieManagement from '@/helpers/CookieManagement';
 
 const routes = [
   {
     path: '/get-started',
     name: 'started',
-    component: () => import('../views/GetStarted.vue'),
+    component: () => import('@/views/GetStarted.vue'),
   },
   {
     path: '/preview/:name',
     alias: '/preview',
     name: 'Preview',
-    component: () => import('../views/Preview.vue'),
+    component: () => import('@/views/Preview.vue'),
     beforeEnter: (
       to: RouteLocationNormalized,
       _: RouteLocationNormalized,
