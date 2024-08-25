@@ -33,6 +33,11 @@
         <Loader />
       </template>
     </Pokedex>
+    <PokeNotification
+      :show="toast.show"
+      :message="toast.message"
+      :time="toast.time"
+    />
   </div>
 </template>
 
@@ -54,6 +59,12 @@ import { MODE } from '../constants/mode';
 
 const isLoading = ref(false);
 const mode = ref<MODE>(MODE.ALL);
+
+const toast = ref({
+  show: false,
+  message: '',
+  time: 5000,
+});
 
 const pokemonStore = usePokemonStore();
 
@@ -80,6 +91,11 @@ const setCurrentPokemon = (pokemon: PokemonList) => {
 };
 const copyToClipboard = async () => {
   navigator.clipboard.writeText(window.location.href);
+  toast.value.message = 'Copied to clipboard';
+  toast.value.show = true;
+  setTimeout(() => {
+    toast.value.show = false;
+  }, toast.value.time);
 };
 const setClosePreview = () => {
   router.replace({ path: '/preview' });
