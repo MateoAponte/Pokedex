@@ -33,8 +33,8 @@
 </template>
 
 <script lang="ts" setup>
-import PokeImage from '@/assets/images/Item.svg';
-import PokeCircle from '@/assets/images/Circle.svg';
+import PokeImage from '@/assets/images/item.svg';
+import PokeCircle from '@/assets/images/circle.svg';
 import router from '@/router/index';
 import CookieManagement from '@/helpers/CookieManagement';
 
