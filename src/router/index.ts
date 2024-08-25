@@ -5,7 +5,6 @@ import {
   RouteLocationNormalized,
 } from 'vue-router';
 import { usePokemonStore } from '../store';
-import { buildCurrentPokemonData } from '../helpers/PokeDataBuilder';
 import CookieManagement from '../helpers/CookieManagement';
 
 const routes = [
