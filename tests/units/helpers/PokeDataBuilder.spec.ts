@@ -11,6 +11,7 @@ import {
 import PokemonByName from '../__mocks__/payloads/PokemonByName.json';
 import PokemonTypes from '../__mocks__/payloads/PokemonTypes.json';
 import PokemonPassives from '../__mocks__/payloads/PokemonPassives.json';
+import PokemonData from '../__mocks__/payloads/PokemonPassives.json';
 
 describe('The PokeDataBuilder File should works correctly and will build the data by the helpers', () => {
   beforeEach(() => {
@@ -25,14 +26,14 @@ describe('The PokeDataBuilder File should works correctly and will build the dat
     );
   });
 
-  it('Should get the sprite from all the data', () => {
+  it('Should get types from the pokemon', () => {
     const types = getPokemonTypes([PokemonTypes]);
     expect(types).toStrictEqual([
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/12.png',
     ]);
   });
 
-  it('Should get the sprite from all the data', () => {
+  it('Should get the passive abilities from the pokemon', () => {
     const types = getPokemonPassives([PokemonPassives]);
     expect(types).toStrictEqual([
       {
@@ -44,12 +45,12 @@ describe('The PokeDataBuilder File should works correctly and will build the dat
     ]);
   });
 
-  it('Should get the sprite from all the data', () => {
+  it('Should get the parsed id from the pokemon', () => {
     const types = getDecenes(1);
     expect(types).toStrictEqual('0001');
   });
 
-  it('Should get the sprite from all the data', () => {
+  it('Should get all the data from the pokemon', () => {
     const types = buildCurrentPokemonData({ data: PokemonByName });
     expect(types).toStrictEqual({
       favorite: false,
@@ -122,7 +123,7 @@ describe('The PokeDataBuilder File should works correctly and will build the dat
     });
   });
 
-  it('Should get the sprite from all the data', () => {
+  it('Should get the parsed stats from the pokemon', () => {
     const types = getStats(PokemonByName.stats);
     expect(types).toStrictEqual([
       {

@@ -1,0 +1,44 @@
+{
+  "favorite": false,
+  "height": 20,
+  "id": 3,
+  "name": "venusaur",
+  "passives": [
+    {
+      "description": "This Pokémon's Speed is doubled during strong sunlight.\n\nThis bonus does not count as a stat modifier.",
+      "isHidden": false,
+      "name": "chlorophyll"
+    }
+  ],
+  "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif",
+  "stats": [
+    {
+      "name": "hp",
+      "stat": 80
+    },
+    {
+      "name": "attack",
+      "stat": 82
+    },
+    {
+      "name": "defense",
+      "stat": 83
+    },
+    {
+      "name": "special-attack",
+      "stat": 100
+    },
+    {
+      "name": "special-defense",
+      "stat": 100
+    },
+    {
+      "name": "speed",
+      "stat": 80
+    }
+  ],
+  "types": [
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/sword-shield/12.png"
+  ],
+  "weight": 1000
+}
