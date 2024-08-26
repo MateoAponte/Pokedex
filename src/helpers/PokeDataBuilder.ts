@@ -28,7 +28,7 @@ export const getPokemonPassives = (passives: any): Passive[] => {
     return {
       name: elementPassive.name,
       description: getEnglishText.effect,
-      isHidden: elementPassive.isHidden,
+      isHidden: elementPassive.isHidden || false,
     };
   });
 };

@@ -302,10 +302,11 @@
       }
     },
     "versions": {
-      "generation-viii": {
-        "icons": {
-          "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/3.png",
-          "front_female": null
+      "generation-v": {
+        "black-white": {
+          "animated": {
+            "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"
+          }
         }
       }
     }
