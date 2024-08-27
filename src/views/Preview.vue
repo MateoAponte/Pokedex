@@ -5,7 +5,6 @@
       :mode="mode"
       :isLoading="isLoading"
       :isFiltered="!!filter"
-      @loadNewContent="getNewPokemons(true)"
     >
       <template #filter>
         <Filter />
@@ -47,7 +46,6 @@ import Pokedex from '@/components/preview/Pokedex.vue';
 import Filter from '@/components/preview/components/Filter.vue';
 import PokeList from '@/components/preview/components/PokeList.vue';
 import Controllers from '@/components/preview/components/Controllers.vue';
-import Loader from '@/components/preview/components/Loader.vue';
 import Preview from '@/components/preview/components/Preview.vue';
 import { onMounted, ref } from 'vue';
 import { usePokemonStore } from '@/store/index.ts';

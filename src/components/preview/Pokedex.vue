@@ -16,11 +16,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { Pokedex } from '@/interfaces/components/Pokedex';
 import { MODE } from '@/constants/mode';
-
-const $emits = defineEmits(['loadNewContent']);
 
 const props = defineProps<Pokedex>();
 
@@ -30,24 +28,4 @@ const loadMoreTrigger = ref<HTMLElement | null>(null);
 const showLoader = computed(() => {
   return !props.isFiltered && props.mode === MODE.ALL;
 });
-
-// const handleScroll = () => {
-//   const trigger = loadMoreTrigger.value;
-//   const container = previewContent.value;
-//   if (trigger && container) {
-//     const triggerPosition = trigger.getBoundingClientRect().top;
-//     const containerBottomPosition = container.getBoundingClientRect().bottom;
-
-//     if (triggerPosition <= containerBottomPosition) {
-//       $emits('loadNewContent', true);
-//     }
-//   }
-// };
-
-// onMounted(() => {
-//   const container = previewContent.value;
-//   if (container) {
-//     container.addEventListener('scroll', handleScroll);
-//   }
-// });
 </script>

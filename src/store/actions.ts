@@ -81,6 +81,7 @@ export const actions: Actions = {
   async getPokemonsByPagination() {
     const { current, next } = state.pagination.value;
     return await PokeApi.getAllPokemons(current, next)
+      // @ts-ignore
       .then((response) => {
         state.cachePokemons.value.push(...response.data.results);
         state.cachePokemons.value = state.cachePokemons.value.map(
@@ -93,6 +94,7 @@ export const actions: Actions = {
         state.pokemons.value = [...state.cachePokemons.value];
         this.updatePokemonWithFavorites();
       })
+      // @ts-ignore
       .catch((error) => {
         return error;
       });
@@ -120,6 +122,7 @@ export const actions: Actions = {
         const response = await PokeApi.getPassives(passive.url);
         return {
           ...response,
+          // @ts-ignore
           data: { ...response.data, isHidden: passive.isHidden },
         };
       }),
@@ -146,11 +149,12 @@ export const actions: Actions = {
   },
   async getPokemonByName(pokemonName) {
     return await PokeApi.getPokemonByName(pokemonName)
-      .then(async (response) => {
+      // @ts-ignore
+      .then(async (response: any) => {
         await this.parsedPokemonFetch(response);
         return response;
       })
-      .catch((error) => {
+      .catch((error: any) => {
         this.setShowPreview(false);
         return error;
       });

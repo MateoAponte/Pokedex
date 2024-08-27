@@ -32,6 +32,8 @@ import { usePokemonStore } from '@/store';
 import PokeItem from './PokeItem.vue';
 import { storeToRefs } from 'pinia';
 import Loader from './Loader.vue';
+
+// @ts-ignore
 import { RecycleScroller } from 'vue-virtual-scroller';
 
 const pokemonStore = usePokemonStore();
