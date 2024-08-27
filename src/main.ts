@@ -9,7 +9,12 @@ import PokeButton from './components/common/Button.vue';
 import PokeNotification from './components/common/Toast.vue';
 import router from './router';
 
+import VueVirtualScroller from 'vue-virtual-scroller';
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
+
 const app = createApp(App);
+
+app.use(VueVirtualScroller);
 
 app.component('PokeInput', PokeInput);
 app.component('PokeText', PokeText);

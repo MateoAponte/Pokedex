@@ -31,23 +31,23 @@ const showLoader = computed(() => {
   return !props.isFiltered && props.mode === MODE.ALL;
 });
 
-const handleScroll = () => {
-  const trigger = loadMoreTrigger.value;
-  const container = previewContent.value;
-  if (trigger && container) {
-    const triggerPosition = trigger.getBoundingClientRect().top;
-    const containerBottomPosition = container.getBoundingClientRect().bottom;
+// const handleScroll = () => {
+//   const trigger = loadMoreTrigger.value;
+//   const container = previewContent.value;
+//   if (trigger && container) {
+//     const triggerPosition = trigger.getBoundingClientRect().top;
+//     const containerBottomPosition = container.getBoundingClientRect().bottom;
 
-    if (triggerPosition <= containerBottomPosition) {
-      $emits('loadNewContent', true);
-    }
-  }
-};
+//     if (triggerPosition <= containerBottomPosition) {
+//       $emits('loadNewContent', true);
+//     }
+//   }
+// };
 
-onMounted(() => {
-  const container = previewContent.value;
-  if (container) {
-    container.addEventListener('scroll', handleScroll);
-  }
-});
+// onMounted(() => {
+//   const container = previewContent.value;
+//   if (container) {
+//     container.addEventListener('scroll', handleScroll);
+//   }
+// });
 </script>

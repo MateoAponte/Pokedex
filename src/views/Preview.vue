@@ -5,7 +5,7 @@
       :mode="mode"
       :isLoading="isLoading"
       :isFiltered="!!filter"
-      @loadNewContent="getNewPokemons"
+      @loadNewContent="getNewPokemons(true)"
     >
       <template #filter>
         <Filter />
@@ -16,6 +16,7 @@
           @setPokemon="setCurrentPokemon"
           @updateFavorite="updateFavorite"
           @deleteFavorite="deleteFavorite"
+          @loadNewContent="getNewPokemons(true)"
         />
       </template>
       <template #controllers>
@@ -30,7 +31,7 @@
         />
       </template>
       <template #loader>
-        <Loader />
+        <!-- <Loader /> -->
       </template>
     </Pokedex>
     <PokeNotification
@@ -101,6 +102,7 @@ const setClosePreview = () => {
   router.replace({ path: '/preview' });
   pokemonStore.setShowPreview(false);
 };
+
 const updatePreviewFavorite = (pokemon: Pokemon) => {
   const pokePreview = pokemons.value.find((poke) => poke.id === pokemon.id);
   if (pokePreview) {
