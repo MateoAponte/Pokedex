@@ -1,6 +1,6 @@
 # Pokedex
 
-![alt text](screen-capture.gif)
+![alt text](./src/assets/images/readme/capture.gif)
 
 # About the Project
 
@@ -97,6 +97,7 @@ Is added a Input Filter to get some Pokemon by the input String
 To check that the project is working properly we can run the testing. In this project is only one way to check the testing.
 
 ### Low level test:
+
 Running the follow command execute the unit testing to check the low level test's. That execute the testing of the helpers, api's and store.
 
 `npm run test:unit`
