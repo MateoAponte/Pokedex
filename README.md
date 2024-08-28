@@ -12,6 +12,8 @@ This test was created with techs: ![Vue.js](https://img.shields.io/badge/vuejs-%
 
 To manage the information and print the components is used the `Statefull and Stateless pattern`
 
+To manage the PokeList is used a `Virtual Scroll` to prevents the overload of the browser at the moment of render all the Pokemon.
+
 # How to Setup the project
 
 ### 1. Install Node:
