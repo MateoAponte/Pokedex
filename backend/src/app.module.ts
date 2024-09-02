@@ -1,12 +1,11 @@
 import { Module } from '@nestjs/common';
-import { TasksModule } from './tasks/tasks.module';
-import { ProjectsModule } from './projects/projects.module';
-import { PaymentsResolver } from './payments/payments.resolver';
-import { PaymentsModule } from './payments/payments.module';
+import { PokemonModule } from './pokemon/pokemon.module';
+import { PrismaConnectionService } from './prisma-connection/prisma-connection.service';
+import { PrismaConnectionModule } from './prisma-connection/prisma-connection.module';
 
 @Module({
-  imports: [TasksModule, ProjectsModule, PaymentsModule],
+  imports: [PokemonModule, PrismaConnectionModule],
   controllers: [],
-  providers: [PaymentsResolver],
+  providers: [],
 })
 export class AppModule {}

@@ -37,7 +37,7 @@ model Pokemon {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   height Int @default(0)
   name String
-  pokemonId Int
+  pokemonId Int @unique
   sprites String
   stats String
   weight Int @default(0)
