@@ -1,5 +1,19 @@
-import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
+import { CreateTaskDto } from './dto/create-task.dto';
+import { GreetPipe } from './pipes/greet/greet.pipe';
 
 @Controller('tasks')
 export class TasksController {
@@ -11,12 +25,23 @@ export class TasksController {
   }
 
   @Get('/')
-  getTasks() {
-    return 'Returning the index';
+  getTasks(@Query() query: any) {
+    console.log(query);
+  }
+
+  @Get('task/:num')
+  getTask(@Param('num', ParseIntPipe) num: string) {
+    return num + 14;
+  }
+
+  @Get('/greet')
+  Greet(@Query(GreetPipe) query: { name: string; age: number }) {
+    return `Hello ${query.name}, you are ${query.age + 1}  years old`;
   }
 
   @Post('/')
-  createTask() {
+  createTask(@Body() body: CreateTaskDto) {
+    console.log(body);
     return 'Crear tareas';
   }
 
@@ -33,5 +58,11 @@ export class TasksController {
   @Delete('/')
   deleteTask() {
     return 'Eliminar tarea';
+  }
+
+  @Get('/not-found')
+  @HttpCode(404)
+  notFound() {
+    return 'Not found';
   }
 }
