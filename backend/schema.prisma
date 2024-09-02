@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url = env("DATABASE_URL")
+}
+
+// Modelling secundary tables
+model Type {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+  sprites String
+  typeId Int @unique
+}
+model Movement {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  text String
+  movementId Int @unique
+  name String @unique
+  type String
+  power Int
+  pp Int
+}
+model Ability {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  text String
+  pokemon String[]
+  abilityId Int @unique
+  name String @unique
+  pokemonAbility PokemonAbility[]
+}
+
+// Main Pokemon Model
+model Pokemon {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  height Int @default(0)
+  name String
+  pokemonId Int
+  sprites String
+  stats String
+  weight Int @default(0)
+  pokemonAbility PokemonAbility[]
+  type String[]
+  moves String[]
+
+  @@unique([name, pokemonId])
+}
+
+// Weak table Between Pokemon and Abilities
+model PokemonAbility {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  isHidden Boolean @default(false)
+  name String
+  
+  // Relations
+  pokemonId String @unique @db.ObjectId
+  abilityId String @unique @db.ObjectId
+  pokemon Pokemon @relation(fields: [pokemonId], references: [id])
+  ability Ability @relation(fields: [abilityId], references: [id])
+}

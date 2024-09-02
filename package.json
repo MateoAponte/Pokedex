@@ -13,9 +13,12 @@
   "dependencies": {
     "@kalimahapps/vue-icons": "^1.7.1",
     "@lucas-labs/vue3-vsl": "^0.0.2",
+    "@nestjs/core": "^10.4.1",
     "@types/node": "^22.5.0",
     "axios": "^1.7.5",
     "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2",
     "pinia": "^2.2.2",
     "vue": "^3.4.37",
     "vue-router": "^4.4.3",
