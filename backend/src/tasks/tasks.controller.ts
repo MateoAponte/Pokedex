@@ -10,10 +10,12 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GreetPipe } from './pipes/greet/greet.pipe';
+import { GreetGuard } from './guards/greet/greet.guard';
 
 @Controller('tasks')
 export class TasksController {
@@ -35,6 +37,7 @@ export class TasksController {
   }
 
   @Get('/greet')
+  @UseGuards(GreetGuard)
   Greet(@Query(GreetPipe) query: { name: string; age: number }) {
     return `Hello ${query.name}, you are ${query.age + 1}  years old`;
   }
