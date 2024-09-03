@@ -4,5 +4,5 @@ export interface Movement {
   type: string;
   power: number;
   pp: number;
-  moveId: number;
+  movementId: number;
 }

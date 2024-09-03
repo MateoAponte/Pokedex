@@ -14,3 +14,16 @@ export interface IPokemon {
   moves: Movement[];
   weight: number;
 }
+
+export interface BDPokemon {
+  id: string;
+  abilities: string[];
+  height: number;
+  name: string;
+  pokemonId: number;
+  sprites: string;
+  stats: string;
+  types: string[];
+  moves: string[];
+  weight: number;
+}

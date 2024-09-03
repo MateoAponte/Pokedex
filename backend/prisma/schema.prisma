@@ -8,13 +8,13 @@ datasource db {
 }
 
 // Modelling secundary tables
-model Type {
+model Types {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
-  sprites String
+  sprite String
   typeId Int @unique
 }
-model Movement {
+model Movements {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   text String
   movementId Int @unique
@@ -29,7 +29,7 @@ model Ability {
   pokemon String[]
   abilityId Int @unique
   name String @unique
-  pokemonAbility PokemonAbility[]
+  pokemonAbility Ability_Pokemon[]
 }
 
 // Main Pokemon Model
@@ -41,15 +41,16 @@ model Pokemon {
   sprites String
   stats String
   weight Int @default(0)
-  pokemonAbility PokemonAbility[]
-  type String[]
+  pokemonAbility Ability_Pokemon[]
+  types String[]
   moves String[]
+  abilities String[]
 
   @@unique([name, pokemonId])
 }
 
 // Weak table Between Pokemon and Abilities
-model PokemonAbility {
+model Ability_Pokemon {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   isHidden Boolean @default(false)
   name String
