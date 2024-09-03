@@ -10,7 +10,6 @@ import {
 import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
-import { log } from 'console';
 
 @Controller('pokemon')
 export class PokemonController {

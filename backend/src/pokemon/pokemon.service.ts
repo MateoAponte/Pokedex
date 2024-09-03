@@ -3,6 +3,7 @@ import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { PrismaConnectionService } from 'src/prisma-connection/prisma-connection.service';
 import { Pokemon } from '@prisma/client';
+import { IPokemon } from './entities/Pokemon';
 
 @Injectable()
 export class PokemonService {
@@ -16,10 +17,14 @@ export class PokemonService {
     return await this.prisma.pokemon.findMany();
   }
 
-  async findOne(id: string): Promise<Pokemon> {
-    return await this.prisma.pokemon.findUnique({
+  async findOne(id: string): Promise<IPokemon> {
+    const pokemon = await this.prisma.pokemon.findUnique({
       where: { pokemonId: parseInt(id) },
     });
+    const abilityRelation = await this.prisma.pokemonAbility.findUnique({
+      where: { pokemonId: pokemon.id },
+    });
+    
   }
 
   update(id: number, updatePokemonDto: UpdatePokemonDto) {
