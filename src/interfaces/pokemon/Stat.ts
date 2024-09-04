@@ -1,7 +1,7 @@
 import { Component } from 'vue';
 
 export interface Stat {
-  stat: string;
+  base_stat: string;
   name: string;
 }
 

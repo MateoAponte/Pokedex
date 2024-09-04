@@ -85,8 +85,8 @@ const getNewPokemons = (executePagination: boolean) => {
   });
 };
 const setCurrentPokemon = (pokemon: PokemonList) => {
-  router.replace({ path: '/preview', query: { name: pokemon.name } });
-  pokemonStore.getPokemonByName(pokemon.name);
+  router.replace({ path: '/preview', query: { id: pokemon.pokeId } });
+  pokemonStore.getPokemonById(pokemon.pokeId);
 };
 const copyToClipboard = async () => {
   navigator.clipboard.writeText(window.location.href);
@@ -102,7 +102,10 @@ const setClosePreview = () => {
 };
 
 const updatePreviewFavorite = (pokemon: Pokemon) => {
-  const pokePreview = pokemons.value.find((poke) => poke.id === pokemon.id);
+  const pokePreview = pokemons.value.find(
+    (poke) => poke.pokeId === pokemon.pokemonId
+  );
+
   if (pokePreview) {
     setCurrentPokemon({ ...pokePreview, favorite: pokemon.favorite });
     pokePreview.favorite = pokemon.favorite;

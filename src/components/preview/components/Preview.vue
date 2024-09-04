@@ -7,8 +7,10 @@
           :src="Background"
           alt="Background image"
         />
-        <span class="preview__image-tag"> # {{ getDecenes(props.id) }} </span>
-        <img class="preview__image-content" :src="props.sprite" alt="" />
+        <span class="preview__image-tag">
+          # {{ getDecenes(props.pokemonId) }}
+        </span>
+        <img class="preview__image-content" :src="props.sprites" alt="" />
         <span class="preview__close">
           <AnFilledCloseCircle @click="handleClose" />
         </span>
@@ -26,7 +28,7 @@
             class="preview__info-item__content preview__info-item__content--image"
             v-for="types in getTypes"
           >
-            <img :src="types" alt="asdasd" />
+            <img :src="types.sprite" alt="asdasd" />
           </span>
         </div>
         <div class="preview__info-item">
@@ -41,7 +43,7 @@
                 {{ processName(stat.name) }}
               </span>
               <span class="preview__info-item__stats-text">
-                {{ stat.stat }}
+                {{ stat.base_stat }}
               </span>
             </div>
           </div>
@@ -64,7 +66,7 @@
                 />
               </span>
               <span class="preview__info-item__abilities-text">
-                {{ passive.description }}
+                {{ passive.text }}
               </span>
             </div>
           </div>
@@ -94,13 +96,11 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, ComputedRef } from 'vue';
 import { Pokemon } from '@/interfaces/pokemon/Pokemon';
 import Background from '@/assets/images/background.png';
 import { AnFilledCloseCircle, BxSolidStar } from '@kalimahapps/vue-icons';
 import { getDecenes } from '@/helpers/PokeDataBuilder';
-
-const $emit = defineEmits(['close', 'updateFavorite', 'share', 'sharePokemon']);
 
 import { GlStatusHealth } from '@kalimahapps/vue-icons';
 import { LuSwords } from '@kalimahapps/vue-icons';
@@ -111,9 +111,14 @@ import { FlFilledRun } from '@kalimahapps/vue-icons';
 import { PhFillGear } from '@kalimahapps/vue-icons';
 import { IconStat } from '@/interfaces/pokemon/Stat';
 import { McIncognitoModeFill } from '@kalimahapps/vue-icons';
+import { TypesPokemon } from '@/interfaces/pokemon/TypesPokemon';
+
+const $emit = defineEmits(['close', 'updateFavorite', 'share', 'sharePokemon']);
+
+const props = defineProps<Pokemon>();
 
 const getSummaryFields = computed(() => {
-  const { sprite, types, favorite, id, stats, passives, ...content } = props;
+  const { sprites, types, favorite, id, stats, abilities, ...content } = props;
   const fields = Object.keys(content).map((key: string) => ({
     value: (content as any)[key],
     key,
@@ -121,7 +126,7 @@ const getSummaryFields = computed(() => {
   const addDataToFields = proccessFields(fields);
   return addDataToFields;
 });
-const getTypes = computed(() => {
+const getTypes: ComputedRef<TypesPokemon[]> = computed(() => {
   const { types } = props;
   return types;
 });
@@ -130,8 +135,8 @@ const getStats = computed(() => {
   return stats;
 });
 const getPassives = computed(() => {
-  const { passives } = props;
-  return passives;
+  const { abilities } = props;
+  return abilities;
 });
 const processName = (name: string) => {
   return name.replace(/-/g, ' ');
@@ -175,6 +180,4 @@ const handleShare = () => {
 const handleClose = () => {
   $emit('close');
 };
-
-const props = defineProps<Pokemon>();
 </script>

@@ -1,6 +1,6 @@
 export interface PokemonList {
   name: string;
-  url: string;
-  id: number;
+  id: string;
+  pokeId: number;
   favorite: boolean;
 }

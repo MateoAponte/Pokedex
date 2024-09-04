@@ -9,7 +9,7 @@
         <PokeItem
           :key="item.id"
           :pokemon="item"
-          :id="item.id"
+          :id="item.pokeId"
           @click="handleClick(item)"
           @update:favorite="updateFavorite($event)"
         />
@@ -75,7 +75,7 @@ const handleScroll = () => {
 };
 
 const updateFavorite = (pokemon: PokeItemInterface) => {
-  const updatedPokemon = props.list.find((poke) => poke.id === pokemon.id);
+  const updatedPokemon = props.list.find((poke) => poke.pokeId === pokemon.id);
   pokemon.pokemon.favorite = pokemon.favorite || false;
   pokemon.favorite
     ? $emit('updateFavorite', updatedPokemon)

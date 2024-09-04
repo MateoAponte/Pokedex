@@ -1,14 +1,15 @@
 import { Stat } from './Stat';
-import { Passive } from './Passive';
+import { Abilitie } from './Abilitie';
 
 export interface Pokemon {
   name: string;
   weight: number;
   height: number;
-  sprite: string;
+  sprites: string;
   types: string[];
   favorite: boolean;
   id: number;
+  pokemonId: number;
   stats: Stat[];
-  passives: Passive[];
+  abilities: Abilitie[];
 }

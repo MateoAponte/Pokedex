@@ -13,12 +13,12 @@ export interface Actions {
   setCurrentPokemon: (pokemon: Pokemon) => void;
   setPagination: () => void;
   setShowPreview: (show: boolean) => void;
-  fetchPokemonTypes: (pokemon: Pokemon) => Promise<AxiosResponse[]>;
-  fetchPokemonPassives: (pokemon: Pokemon) => Promise<AxiosResponse[]>;
+  // fetchPokemonTypes: (pokemon: Pokemon) => Promise<AxiosResponse[]>;
+  // fetchPokemonPassives: (pokemon: Pokemon) => Promise<AxiosResponse[]>;
   filterPokemons: (filter: string) => void;
   setFilter: (filter: string) => void;
   resetPokemons: () => void;
   getPokemonsByPagination: () => Promise<AxiosResponse<ListPokemonApi>>;
-  getPokemonByName: (pokemonName: string) => Promise<AxiosResponse<PokemonApi>>;
-  parsedPokemonFetch: (response: AxiosResponse<PokemonApi>) => Promise<void>;
+  getPokemonById: (id: number) => Promise<AxiosResponse<PokemonApi>>;
+  // parsedPokemonFetch: (response: AxiosResponse<PokemonApi>) => Promise<void>;
 }

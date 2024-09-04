@@ -12,36 +12,16 @@ class PokeApi {
     try {
       if (typeof offset !== 'number' || typeof limit !== 'number')
         throw 'No same type';
-      return axios.get(
-        `${this.pokemonEndpoint}?offset=${offset}&limit=${limit}`
-      );
+      return axios.get(`${this.pokemonEndpoint}?skip=${offset}&limit=${limit}`);
     } catch (err) {
       return { code: CODES_RESPONSE.CODE_ERROR, error: true };
     }
   }
 
-  public getPokemonByName(name: string) {
+  public getPokemonById(id: number) {
     try {
-      if (typeof name !== 'string') throw 'No same type';
-      return axios.get(`${this.pokemonEndpoint}/${name}`);
-    } catch (err) {
-      return { code: CODES_RESPONSE.CODE_ERROR, error: true };
-    }
-  }
-
-  public getTypes(url: string) {
-    try {
-      if (typeof url !== 'string') throw 'No same type';
-      return axios.get(url);
-    } catch (err) {
-      return { code: CODES_RESPONSE.CODE_ERROR, error: true };
-    }
-  }
-
-  public getPassives(url: string) {
-    try {
-      if (typeof url !== 'string') throw 'No same type';
-      return axios.get(url);
+      if (typeof id !== 'number') throw 'No same type';
+      return axios.get(`${this.pokemonEndpoint}/${id}`);
     } catch (err) {
       return { code: CODES_RESPONSE.CODE_ERROR, error: true };
     }

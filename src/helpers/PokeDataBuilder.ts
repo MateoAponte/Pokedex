@@ -3,7 +3,7 @@ import { PokemonApi } from '@/interfaces/api/PokemonApi';
 import LocalStorageManagment from './LocalStorageManagment';
 import { Pokemon } from '@/interfaces/pokemon/Pokemon';
 import { Stat } from '@/interfaces/pokemon/Stat';
-import { Passive } from '@/interfaces/pokemon/Passive';
+import { Passive } from '@/interfaces/pokemon/Abilitie';
 
 export const getSprite = (sprites: any): string => {
   const sprite = sprites.versions['generation-v']
@@ -49,37 +49,48 @@ export const buildCurrentPokemonData = (
   response: AxiosResponse<PokemonApi>
 ): Pokemon => {
   if (response.data) {
-    const { name, weight, height, sprites, stats, types, id, abilities } =
-      response.data;
+    const {
+      name,
+      weight,
+      height,
+      sprites,
+      stats,
+      types,
+      id,
+      abilities,
+      pokemonId,
+    } = response.data;
 
     const items = LocalStorageManagment.getItem(LocalStorageManagment.key);
     let parsedItems = null;
     if (items)
       parsedItems = JSON.parse(items).find(
-        (item: PokemonApi) => item.id === id
+        (item: PokemonApi) => item.pokeId === pokemonId
       );
 
     return {
       name,
       weight,
       height,
-      sprite: getSprite(sprites),
+      sprites: getSprite(sprites),
       types,
       id,
       stats: getStats(stats),
-      passives: abilities,
+      abilities,
       favorite: parsedItems?.favorite || false,
+      pokemonId,
     };
   }
   return {
     name: '',
     weight: 0,
     height: 0,
-    sprite: '',
+    sprites: '',
     types: [],
     id: 0,
     favorite: false,
     stats: [],
-    passives: [],
+    abilities: [],
+    pokemonId: 0,
   };
 };

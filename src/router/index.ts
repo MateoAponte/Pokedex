@@ -23,12 +23,11 @@ const routes = [
       _: RouteLocationNormalized,
       next: NavigationGuardNext
     ) => {
-      const name = to.query.name as string;
-      if (name) {
+      const id = to.query.id as string;
+      if (id) {
         const pokemonStore = usePokemonStore();
-        const result = pokemonStore.getPokemonByName(name);
-        result.then((response) => {
-          pokemonStore.parsedPokemonFetch(response);
+        const result = pokemonStore.getPokemonById(parseInt(id));
+        result.then(() => {
           const currentName = to.query.name;
           if (to.query.name !== currentName) {
             next({ path: '/preview', query: { name: currentName } });

@@ -1,9 +1,5 @@
 import PokeApi from '@/api/PokeApi';
-import {
-  buildCurrentPokemonData,
-  getPokemonPassives,
-  getPokemonTypes,
-} from '@/helpers/PokeDataBuilder';
+
 import { Actions } from '@/interfaces/store/actions';
 import { state } from './state';
 import LocalStorageManagement from '@/helpers/LocalStorageManagment';
@@ -21,7 +17,7 @@ export const actions: Actions = {
   addFavorites: (pokemon) => {
     state.favorities.value.push(pokemon);
     state.favorities.value = state.favorities.value.sort((a, b) => {
-      return a.id - b.id;
+      return a.pokeId - b.pokeId;
     });
     actions.setLocalStorageFavorites(state.favorities?.value);
   },
@@ -32,7 +28,7 @@ export const actions: Actions = {
   updatePokemonWithFavorites: () => {
     state.pokemons.value.forEach((pokemon, index) => {
       const updatedPokemon = state.favorities.value.find(
-        (poke) => poke.id === pokemon.id
+        (poke) => poke.pokeId === pokemon.pokeId
       );
       if (updatedPokemon) {
         state.pokemons.value[index].favorite = true;
@@ -50,7 +46,7 @@ export const actions: Actions = {
   },
   setCurrentPokemon: (pokemon) => {
     const updatedPokemon = state.favorities.value.find(
-      (poke) => poke.id === pokemon.id
+      (poke) => poke.pokeId === pokemon.pokemonId
     );
 
     state.currentPokemon.value = updatedPokemon
@@ -83,14 +79,11 @@ export const actions: Actions = {
     return await PokeApi.getAllPokemons(current, next)
       // @ts-ignore
       .then((response) => {
-        state.cachePokemons.value.push(...response.data.results);
+        state.cachePokemons.value.push(...response.data);
         state.cachePokemons.value = state.cachePokemons.value.map(
-          (pokemon, index) => {
-            return pokemon.id
-              ? { ...pokemon, favorite: false }
-              : { ...pokemon, id: index + 1, favorite: false };
-          }
+          (pokemon) => ({ ...pokemon, favorite: false })
         );
+
         state.pokemons.value = [...state.cachePokemons.value];
         this.updatePokemonWithFavorites();
       })
@@ -99,60 +92,61 @@ export const actions: Actions = {
         return error;
       });
   },
-  async fetchPokemonTypes(pokemon) {
-    const promises = pokemon.types.map(
-      (elementType: any) => elementType.type.url
-    );
+  // async fetchPokemonTypes(pokemon) {
+  //   const promises = pokemon.types.map(
+  //     (elementType: any) => elementType.type.url
+  //   );
 
-    return await Promise.all([
-      ...promises.map((url) => PokeApi.getTypes(url)),
-    ]).then((response) => {
-      const data = response.map((element: any) => element.data);
-      return data;
-    });
-  },
-  async fetchPokemonPassives(pokemon) {
-    const promises = pokemon.passives.map((elementType: any) => ({
-      url: elementType.ability.url,
-      isHidden: elementType.is_hidden,
-    }));
+  //   return await Promise.all([
+  //     ...promises.map((url) => PokeApi.getTypes(url)),
+  //   ]).then((response) => {
+  //     const data = response.map((element: any) => element.data);
+  //     return data;
+  //   });
+  // },
+  // async fetchPokemonPassives(pokemon) {
+  //   const promises = pokemon.passives.map((elementType: any) => ({
+  //     url: elementType.ability.url,
+  //     isHidden: elementType.is_hidden,
+  //   }));
 
-    return await Promise.all([
-      ...promises.map(async (passive) => {
-        const response = await PokeApi.getPassives(passive.url);
-        return {
-          ...response,
-          // @ts-ignore
-          data: { ...response.data, isHidden: passive.isHidden },
-        };
-      }),
-    ]).then((response) => {
-      const data = response.map((element: any) => element.data);
-      return data;
-    });
-  },
-  async parsedPokemonFetch(response) {
-    this.setShowPreview(true);
-    const pokemon = buildCurrentPokemonData(response);
+  //   return await Promise.all([
+  //     ...promises.map(async (passive) => {
+  //       const response = await PokeApi.getPassives(passive.url);
+  //       return {
+  //         ...response,
+  //         // @ts-ignore
+  //         data: { ...response.data, isHidden: passive.isHidden },
+  //       };
+  //     }),
+  //   ]).then((response) => {
+  //     const data = response.map((element: any) => element.data);
+  //     return data;
+  //   });
+  // },
+  // async parsedPokemonFetch(response) {
+  //   this.setShowPreview(true);
+  //   const pokemon = buildCurrentPokemonData(response);
 
-    const parsedTypes = await this.fetchPokemonTypes(pokemon);
-    const typesResources = getPokemonTypes(parsedTypes);
+  //   const parsedTypes = await this.fetchPokemonTypes(pokemon);
+  //   const typesResources = getPokemonTypes(parsedTypes);
 
-    const parsedPassives = await this.fetchPokemonPassives(pokemon);
-    const passivesResources = getPokemonPassives(parsedPassives);
+  //   const parsedPassives = await this.fetchPokemonPassives(pokemon);
+  //   const passivesResources = getPokemonPassives(parsedPassives);
 
-    state.currentPokemon.value = {
-      ...pokemon,
-      passives: passivesResources,
-      types: typesResources,
-    };
-  },
-  async getPokemonByName(pokemonName) {
-    return await PokeApi.getPokemonByName(pokemonName)
+  //   state.currentPokemon.value = {
+  //     ...pokemon,
+  //     passives: passivesResources,
+  //     types: typesResources,
+  //   };
+  // },
+  async getPokemonById(pokemonName) {
+    return await PokeApi.getPokemonById(pokemonName)
       // @ts-ignore
       .then(async (response: any) => {
-        await this.parsedPokemonFetch(response);
-        return response;
+        this.setShowPreview(true);
+        this.setCurrentPokemon(response.data);
+        return response.data;
       })
       .catch((error: any) => {
         this.setShowPreview(false);
