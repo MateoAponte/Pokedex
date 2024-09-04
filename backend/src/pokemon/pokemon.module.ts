@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { PokemonController } from './pokemon.controller';
-import { PrismaConnectionService } from 'src/prisma-connection/prisma-connection.service';
 
 @Module({
   controllers: [PokemonController],

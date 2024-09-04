@@ -2,12 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { PrismaConnectionService } from 'src/prisma-connection/prisma-connection.service';
-import { Pokemon } from '@prisma/client';
+import { PokemonList } from '@prisma/client';
 import { BDPokemon, IPokemon } from './entities/Pokemon';
-import { text } from 'stream/consumers';
 import { Ability } from './entities/Ability';
 import { Movement } from './entities/Moves';
 import { Type } from './entities/Type';
+import { PaginationDto } from './dto/pagination.dto';
+import { PAGINATION } from 'src/constants/constants';
 
 @Injectable()
 export class PokemonService {
@@ -17,8 +18,11 @@ export class PokemonService {
     return 'This action adds a new pokemon';
   }
 
-  async findAll(): Promise<Pokemon[]> {
-    return await this.prisma.pokemon.findMany();
+  async findAll(paginationDto: PaginationDto): Promise<PokemonList[]> {
+    return await this.prisma.pokemonList.findMany({
+      skip: parseInt(paginationDto.skip ?? PAGINATION.skip),
+      take: parseInt(paginationDto.limit ?? PAGINATION.limit),
+    });
   }
 
   async getPokemon(id: string): Promise<BDPokemon> {
@@ -94,12 +98,10 @@ export class PokemonService {
   async findOne(id: string) {
     const pokemon = await this.getPokemon(id);
     const abilities = await this.getAbilities(pokemon.id);
-    const movements = await this.getMoves(pokemon.moves);
     const types = await this.getTypes(pokemon.types);
     return {
       ...pokemon,
       abilities,
-      moves: movements,
       types,
       stats: JSON.parse(pokemon.stats),
     };

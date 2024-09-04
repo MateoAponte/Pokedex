@@ -5281,21 +5281,25 @@ const client = new MongoClient(url);
 
 async function main() {
   await client.connect();
-  console.log('Connected successfully to server');
-  // const db = client.db('PokemonBD');
+  const db = client.db('PokemonBD');
 
-  // const abilities = await db.collection('Ability').find({}).toArray();
-  // const pokemonAbilities = db.collection('Ability_Pokemon');
+  const pokeCollection = db.collection('PokemonList');
+  const pokemons = await pokeCollection.find({}).toArray();
 
-  // abilities.forEach(async (ability) => {
-  //   // Para cada pokemon, actualiza los documentos en la colección PokemonAbility
-  //   await pokemonAbilities.updateMany(
-  //     { name: ability.name }, // Asumiendo que el campo 'name' en PokemonAbility es el mismo que el campo 'name' en Pokemon
-  //     {
-  //       $set: { abilityId: ability._id }, // Asigna el campo pokemonId con el valor del campo _id del documento Pokemon
-  //     },
-  //   );
-  // });
+  pokemons.forEach(async (pokemon, index) => {
+    // Para cada pokemon, actualiza los documentos en la colección PokemonAbility
+    await pokeCollection.updateOne(
+      { name: pokemon.name }, // Asumiendo que el campo 'name' en PokemonAbility es el mismo que el campo 'name' en Pokemon
+      {
+        $unset: {
+          url: 1,
+        },
+        $set: {
+          pokeId: index + 1,
+        },
+      },
+    );
+  });
 }
 
 app.listen(PORT, () => {

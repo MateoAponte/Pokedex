@@ -61,3 +61,10 @@ model Ability_Pokemon {
   pokemon Pokemon @relation(fields: [pokemonId], references: [id])
   ability Ability @relation(fields: [abilityId], references: [id])
 }
+
+// PokeList
+model PokemonList {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  pokeId Int @unique
+}
