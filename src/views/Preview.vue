@@ -12,6 +12,7 @@
       <template #information>
         <PokeList
           :list="pokemons"
+          :mode="mode"
           @setPokemon="setCurrentPokemon"
           @updateFavorite="updateFavorite"
           @deleteFavorite="deleteFavorite"
@@ -24,9 +25,11 @@
       <template #preview>
         <Preview
           v-bind="{ ...currentPokemon }"
+          :currentMovement="currentMovement"
           @close="setClosePreview"
           @updateFavorite="updatePreviewFavorite"
           @sharePokemon="copyToClipboard"
+          @updateMovement="updateMovement"
         />
       </template>
       <template #loader>
@@ -74,6 +77,7 @@ const {
   filter,
   favorities,
   cachePokemons,
+  currentMovement,
 } = storeToRefs(pokemonStore);
 
 const getNewPokemons = (executePagination: boolean) => {
@@ -99,8 +103,13 @@ const copyToClipboard = async () => {
 const setClosePreview = () => {
   router.replace({ path: '/preview' });
   pokemonStore.setShowPreview(false);
+  pokemonStore.setCurrentMovementInVoid();
 };
-
+const updateMovement = (move: string) => {
+  !!move
+    ? pokemonStore.getMovementByName(move)
+    : pokemonStore.setCurrentMovementInVoid();
+};
 const updatePreviewFavorite = (pokemon: Pokemon) => {
   const pokePreview = pokemons.value.find(
     (poke) => poke.pokeId === pokemon.pokemonId

@@ -94,6 +94,25 @@ export class PokemonService {
 
     return parsedMovements;
   }
+  async getMove(name: string): Promise<Movement> {
+    const movement = await this.prisma.movements.findUnique({
+      where: {
+        name: name,
+      },
+      select: {
+        text: true,
+        name: true,
+        type: true,
+        power: true,
+        pp: true,
+        movementId: true,
+      },
+    });
+    console.log(movement);
+
+    movement.text = this.prisma.parsedTextBD(movement.text);
+    return movement;
+  }
 
   async findOne(id: string) {
     const pokemon = await this.getPokemon(id);

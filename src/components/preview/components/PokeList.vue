@@ -15,7 +15,11 @@
         />
       </template>
       <template #after>
-        <div class="preview__loader" ref="loadMoreTrigger">
+        <div
+          class="preview__loader"
+          ref="loadMoreTrigger"
+          v-if="props.mode === MODE.ALL"
+        >
           <Loader />
         </div>
       </template>
@@ -35,6 +39,7 @@ import Loader from './Loader.vue';
 
 // @ts-ignore
 import { RecycleScroller } from 'vue-virtual-scroller';
+import { MODE } from '@/constants/mode';
 
 const pokemonStore = usePokemonStore();
 const {} = storeToRefs(pokemonStore);

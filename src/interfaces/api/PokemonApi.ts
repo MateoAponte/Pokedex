@@ -10,3 +10,6 @@ export interface ListPokemonApi {
 export interface PokemonApi {
   [key: string]: any;
 }
+export interface MovementApi {
+  [key: string]: any;
+}

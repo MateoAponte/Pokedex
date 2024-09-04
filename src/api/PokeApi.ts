@@ -26,6 +26,15 @@ class PokeApi {
       return { code: CODES_RESPONSE.CODE_ERROR, error: true };
     }
   }
+
+  public getMovementByName(name: string) {
+    try {
+      if (typeof name !== 'string') throw 'No same type';
+      return axios.get(`${this.pokemonEndpoint}/get-movement/${name}`);
+    } catch (err) {
+      return { code: CODES_RESPONSE.CODE_ERROR, error: true };
+    }
+  }
 }
 
 export default new PokeApi();

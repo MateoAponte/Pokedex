@@ -1,7 +1,11 @@
 import { AxiosResponse } from 'axios';
-import { Pokemon } from '@/interfaces/pokemon/Pokemon';
+import { Movement, Pokemon } from '@/interfaces/pokemon/Pokemon';
 import { PokemonList } from '@/interfaces/pokemon/PokemonList';
-import { ListPokemonApi, PokemonApi } from '@/interfaces/api/PokemonApi';
+import {
+  ListPokemonApi,
+  MovementApi,
+  PokemonApi,
+} from '@/interfaces/api/PokemonApi';
 
 export interface Actions {
   setPokemons: (pokemons: PokemonList[]) => void;
@@ -13,12 +17,12 @@ export interface Actions {
   setCurrentPokemon: (pokemon: Pokemon) => void;
   setPagination: () => void;
   setShowPreview: (show: boolean) => void;
-  // fetchPokemonTypes: (pokemon: Pokemon) => Promise<AxiosResponse[]>;
-  // fetchPokemonPassives: (pokemon: Pokemon) => Promise<AxiosResponse[]>;
   filterPokemons: (filter: string) => void;
   setFilter: (filter: string) => void;
   resetPokemons: () => void;
   getPokemonsByPagination: () => Promise<AxiosResponse<ListPokemonApi>>;
   getPokemonById: (id: number) => Promise<AxiosResponse<PokemonApi>>;
-  // parsedPokemonFetch: (response: AxiosResponse<PokemonApi>) => Promise<void>;
+  getMovementByName: (name: string) => Promise<AxiosResponse<MovementApi>>;
+  setCurrentMovement: (movement: Movement) => void;
+  setCurrentMovementInVoid: () => void;
 }

@@ -14,6 +14,10 @@
         <span class="preview__close">
           <AnFilledCloseCircle @click="handleClose" />
         </span>
+        <MovementInfo
+          v-bind="{ ...props.currentMovement }"
+          @close="closeMovementPopover"
+        />
       </div>
       <div class="preview__info">
         <div v-for="field of getSummaryFields" class="preview__info-item">
@@ -71,6 +75,20 @@
             </div>
           </div>
         </div>
+        <div class="preview__info-item">
+          <span class="preview__info-item__label"> Movements: </span>
+          <div class="preview__info-item__move">
+            <div
+              class="preview__info-item__move-content"
+              v-for="move in getMoves"
+              @click="updateMove(move)"
+            >
+              <span class="preview__info-item__move-label">
+                {{ move }}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="preview__actions">
         <PokeButton
@@ -97,7 +115,6 @@
 
 <script lang="ts" setup>
 import { computed, ComputedRef } from 'vue';
-import { Pokemon } from '@/interfaces/pokemon/Pokemon';
 import Background from '@/assets/images/background.png';
 import { AnFilledCloseCircle, BxSolidStar } from '@kalimahapps/vue-icons';
 import { getDecenes } from '@/helpers/PokeDataBuilder';
@@ -112,13 +129,32 @@ import { PhFillGear } from '@kalimahapps/vue-icons';
 import { IconStat } from '@/interfaces/pokemon/Stat';
 import { McIncognitoModeFill } from '@kalimahapps/vue-icons';
 import { TypesPokemon } from '@/interfaces/pokemon/TypesPokemon';
+import { Preview } from '@/interfaces/components/Preview';
 
-const $emit = defineEmits(['close', 'updateFavorite', 'share', 'sharePokemon']);
+import MovementInfo from './MovementInfo.vue';
 
-const props = defineProps<Pokemon>();
+const $emit = defineEmits([
+  'close',
+  'updateFavorite',
+  'share',
+  'sharePokemon',
+  'updateMovement',
+]);
+
+const props = defineProps<Preview>();
 
 const getSummaryFields = computed(() => {
-  const { sprites, types, favorite, id, stats, abilities, ...content } = props;
+  const {
+    sprites,
+    types,
+    favorite,
+    id,
+    stats,
+    abilities,
+    moves,
+    currentMovement,
+    ...content
+  } = props;
   const fields = Object.keys(content).map((key: string) => ({
     value: (content as any)[key],
     key,
@@ -133,6 +169,10 @@ const getTypes: ComputedRef<TypesPokemon[]> = computed(() => {
 const getStats = computed(() => {
   const { stats } = props;
   return stats;
+});
+const getMoves = computed(() => {
+  const { moves } = props;
+  return moves;
 });
 const getPassives = computed(() => {
   const { abilities } = props;
@@ -155,6 +195,12 @@ const getStatIcon = (name: string) => {
     speed: FlFilledRun,
   };
   return icons[name] || PhFillGear;
+};
+const closeMovementPopover = () => {
+  $emit('updateMovement', '');
+};
+const updateMove = (move: string) => {
+  $emit('updateMovement', move);
 };
 const proccessFields = (fields: any) => {
   return fields.map((field: any) => {

@@ -187,6 +187,86 @@
         font-weight: 600;
         letter-spacing: 0.05rem;
       }
+
+      &-movement {
+        position: absolute;
+        border-radius: 8px;
+        left: 1rem;
+        top: 0.4rem;
+        width: 25%;
+        height: 70%;
+        z-index: 5;
+
+        &-title {
+          font-size: 0.9rem;
+          font-weight: 600;
+          text-transform: capitalize;
+          padding-bottom: 0.4rem;
+          padding: 0.5rem 0.5rem;
+          background-color: map-get($colors, 'shield');
+          color: map-get($colors, 'white');
+          border-radius: 8px 8px 0 0;
+
+          border-bottom: 1px solid map-get($colors, 'border-gray');
+          position: relative;
+          z-index: 15;
+        }
+        &-close {
+          position: absolute;
+          right: 0.5rem;
+          top: 0.6rem;
+          color: map-get($colors, 'white');
+          cursor: pointer;
+        }
+
+        &-stats {
+          position: relative;
+          max-height: 75%;
+          overflow-y: auto;
+          padding: 0 0.5rem;
+          border-radius: 0 0 15px 15px;
+          background-color: map-get($colors, 'white');
+        }
+        &-stat {
+          height: auto;
+          border-bottom: 1px solid map-get($colors, 'border-gray');
+          padding-bottom: 0.5rem;
+        }
+        &-label {
+          font-size: 0.7rem;
+          font-weight: 600;
+          border-radius: 5px;
+          text-transform: capitalize;
+          height: auto;
+          margin-right: 0.2rem;
+          text-align: left;
+        }
+        &-text {
+          font-size: 0.6rem;
+          font-weight: 500;
+          border-radius: 5px;
+          line-height: px;
+          text-transform: capitalize;
+
+          &--description {
+            font-size: 0.5rem;
+            font-weight: 600;
+            color: map-get($colors, 'dark-gray');
+            position: relative;
+          }
+
+          img {
+            height: 20px;
+            width: 30px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 0.2rem;
+            margin-top: 0.4rem;
+            top: -5px;
+            position: relative;
+          }
+        }
+      }
     }
     .preview__info {
       padding: 1.25rem;
@@ -298,6 +378,33 @@
           }
         }
 
+        &__move {
+          display: flex;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+
+          &-content {
+            min-width: 5rem;
+            max-width: 7rem;
+            margin-bottom: 0.7rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+          &-label {
+            @include title;
+            font-size: 0.6rem;
+            font-weight: 500;
+            border-radius: 5px;
+            text-transform: capitalize;
+            height: auto;
+          }
+        }
+
         &__content {
           font-weight: 500;
           font-size: 1.1rem;
@@ -392,4 +499,37 @@
   100% {
     transform: translate(0, 0) rotate(0);
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.4s ease-in-out;
+}
+/* delay leave of parent element */
+.fade-leave-active {
+  transition-delay: 0.5s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+
+/* we can also transition nested elements using nested selectors */
+.fade-enter-active .container,
+.fade-leave-active .container {
+  transition: all 0.5s ease-in-out;
+}
+/* delay enter of nested element */
+.fade-enter-active .container {
+  transition-delay: 0.45s;
+}
+
+.fade-enter-from .container,
+.fade-leave-to .container {
+  opacity: 0.001;
+  margin-top: -45px;
+  transform: scaleY(0);
+  transform-origin: top;
 }

@@ -36,6 +36,10 @@ export class PokemonController {
     const pokemon = await this.pokemonService.getPokemon(id);
     return this.pokemonService.getMoves(pokemon.moves);
   }
+  @Get('get-movement/:name')
+  async findMove(@Param('name') name: string) {
+    return await this.pokemonService.getMove(name);
+  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePokemonDto: UpdatePokemonDto) {

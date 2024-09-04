@@ -1,5 +1,5 @@
 import { Ref } from 'vue';
-import { Pokemon } from '@/interfaces/pokemon/Pokemon';
+import { Movement, Pokemon } from '@/interfaces/pokemon/Pokemon';
 import { PokemonList } from '@/interfaces/pokemon/PokemonList';
 import { Pagination } from '@/interfaces/api/Pagination';
 
@@ -11,4 +11,5 @@ export interface State {
   pagination: Ref<Pagination>;
   showPreview: Ref<boolean>;
   filter: Ref<string>;
+  currentMovement: Ref<Movement>;
 }

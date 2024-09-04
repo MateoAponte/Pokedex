@@ -92,54 +92,6 @@ export const actions: Actions = {
         return error;
       });
   },
-  // async fetchPokemonTypes(pokemon) {
-  //   const promises = pokemon.types.map(
-  //     (elementType: any) => elementType.type.url
-  //   );
-
-  //   return await Promise.all([
-  //     ...promises.map((url) => PokeApi.getTypes(url)),
-  //   ]).then((response) => {
-  //     const data = response.map((element: any) => element.data);
-  //     return data;
-  //   });
-  // },
-  // async fetchPokemonPassives(pokemon) {
-  //   const promises = pokemon.passives.map((elementType: any) => ({
-  //     url: elementType.ability.url,
-  //     isHidden: elementType.is_hidden,
-  //   }));
-
-  //   return await Promise.all([
-  //     ...promises.map(async (passive) => {
-  //       const response = await PokeApi.getPassives(passive.url);
-  //       return {
-  //         ...response,
-  //         // @ts-ignore
-  //         data: { ...response.data, isHidden: passive.isHidden },
-  //       };
-  //     }),
-  //   ]).then((response) => {
-  //     const data = response.map((element: any) => element.data);
-  //     return data;
-  //   });
-  // },
-  // async parsedPokemonFetch(response) {
-  //   this.setShowPreview(true);
-  //   const pokemon = buildCurrentPokemonData(response);
-
-  //   const parsedTypes = await this.fetchPokemonTypes(pokemon);
-  //   const typesResources = getPokemonTypes(parsedTypes);
-
-  //   const parsedPassives = await this.fetchPokemonPassives(pokemon);
-  //   const passivesResources = getPokemonPassives(parsedPassives);
-
-  //   state.currentPokemon.value = {
-  //     ...pokemon,
-  //     passives: passivesResources,
-  //     types: typesResources,
-  //   };
-  // },
   async getPokemonById(pokemonName) {
     return await PokeApi.getPokemonById(pokemonName)
       // @ts-ignore
@@ -150,6 +102,31 @@ export const actions: Actions = {
       })
       .catch((error: any) => {
         this.setShowPreview(false);
+        return error;
+      });
+  },
+  setCurrentMovement(movement) {
+    state.currentMovement.value = movement;
+  },
+  setCurrentMovementInVoid() {
+    state.currentMovement.value = {
+      text: '',
+      name: '',
+      type: '',
+      power: 0,
+      pp: 0,
+      movementId: 0,
+      id: '',
+    };
+  },
+  async getMovementByName(name) {
+    return await PokeApi.getMovementByName(name)
+      // @ts-ignore
+      .then(async (response: any) => {
+        this.setCurrentMovement(response.data);
+        return response.data;
+      })
+      .catch((error: any) => {
         return error;
       });
   },
