@@ -16,12 +16,6 @@ import { PaginationDto } from './dto/pagination.dto';
 @Controller('pokemon')
 export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
-
-  @Post()
-  create(@Body() createPokemonDto: CreatePokemonDto) {
-    return this.pokemonService.create(createPokemonDto);
-  }
-
   @Get()
   findAll(@Query() paginationDto: PaginationDto) {
     return this.pokemonService.findAll(paginationDto);
@@ -39,15 +33,5 @@ export class PokemonController {
   @Get('get-movement/:name')
   async findMove(@Param('name') name: string) {
     return await this.pokemonService.getMove(name);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePokemonDto: UpdatePokemonDto) {
-    return this.pokemonService.update(+id, updatePokemonDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.pokemonService.remove(+id);
   }
 }
